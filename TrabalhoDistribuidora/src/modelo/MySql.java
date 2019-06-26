@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Statement;
-
 public class MySql {
 	
 	Connection conn;
@@ -15,7 +13,7 @@ public class MySql {
 	    try {
 	    	this.conn = DriverManager.getConnection(url, user, password);
 	        if (conn != null) {
-	        	MySql.criarTables();
+	        	MySql.criarTables(this.conn);
 	            System.out.println("Conectado no banco de dados");
 	        }
 	    } catch (SQLException ex) {
@@ -24,7 +22,7 @@ public class MySql {
 	    }
 	}
 	
-	public static void criarTables () {
+	public static void criarTables (Connection conn) {
 		
 		
 		String cliente = "CREATE TABLE IF NOT EXISTS `cliente` (\n" + 
@@ -94,12 +92,12 @@ public class MySql {
 //			append(  ")ENGINE=INN\" ").toString();
 		
 		try {
-			this.conn.createStatement().execute(fornecedor);
-			this.conn.createStatement().execute(cliente);
-			this.conn.createStatement().execute(produto);
-			this.conn.createStatement().execute(estoque);
-			this.conn.createStatement().execute(transacao);
-			this.conn.createStatement().execute(caixa);
+			conn.createStatement().execute(fornecedor);
+			conn.createStatement().execute(cliente);
+			conn.createStatement().execute(produto);
+			conn.createStatement().execute(estoque);
+			conn.createStatement().execute(transacao);
+			conn.createStatement().execute(caixa);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -112,6 +110,14 @@ public class MySql {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+	}
+
+	public Connection getConn() {
+		return conn;
+	}
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
 	}
 		
 }
