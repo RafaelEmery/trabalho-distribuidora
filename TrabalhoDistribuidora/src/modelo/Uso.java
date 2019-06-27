@@ -15,6 +15,13 @@ public class Uso {
 			mysql.inserirCaixa(1, 200.00);
 			mysql.inserirEstoque(1, 100);
 			mysql.inserirTransacao(1, 100, 200, 1, 10);
+			
+			mysql.deletarCliente(4);
+			mysql.deletarCaixa(1);
+			mysql.deletarProduto(1);
+			mysql.deletarFornecedor(1);
+			mysql.deletarEstoque(1);
+			mysql.deletarTransacao(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

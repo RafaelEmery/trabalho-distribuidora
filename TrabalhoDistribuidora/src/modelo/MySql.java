@@ -131,6 +131,42 @@ public class MySql {
 		this.conn.createStatement().execute(transacao.toString());
 	}
 	
+	public void deletarCliente(int id) throws SQLException {
+		String teste = "DELETE FROM cliente WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+		this.conn.createStatement().execute(teste);
+	}
+	
+	public void deletarFornecedor(int id) throws SQLException {
+		String teste = "DELETE FROM fornecedor WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+		this.conn.createStatement().execute(teste);
+	}
+	
+	public void deletarEstoque(int id) throws SQLException {
+		String teste = "DELETE FROM estoque WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+		this.conn.createStatement().execute(teste);
+	}
+	
+	public void deletarCaixa(int id) throws SQLException {
+		String teste = "DELETE FROM caixa WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+		this.conn.createStatement().execute(teste);
+	}
+	
+	public void deletarProduto(int id) throws SQLException {
+		String teste = "DELETE FROM produto WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+		this.conn.createStatement().execute(teste);
+	}
+	
+	public void deletarTransacao(int id) throws SQLException {
+		String teste = "DELETE FROM transacao WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+		this.conn.createStatement().execute(teste);
+	}
+	
 	public Connection getConn() {
 		return conn;
 	}
