@@ -2,6 +2,7 @@ package modelo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MySql {
@@ -27,12 +28,13 @@ public class MySql {
 		
 		String cliente = "CREATE TABLE IF NOT EXISTS `cliente` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
-				"  `nome` varchar(45) NOT NULL,\n" + 
-				"  `cadastro` varchar(45) NOT NULL,\n" + 
+				"  `nome` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `cadastro` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `tipoPessoa` int(11) NOT NULL,\n" + 
-				"  `telefone` varchar(45) NOT NULL,\n" + 
+				"  `telefone` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
-				") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+				") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;\n" + 
+				"";
 		String fornecedor = "CREATE TABLE IF NOT EXISTS `fornecedor` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
 				"  `nome` varchar(45) NOT NULL,\n" + 
@@ -165,6 +167,28 @@ public class MySql {
 		String teste = "DELETE FROM transacao WHERE id = "+id+"\n" + 
 				"ORDER BY id LIMIT 1;";
 		this.conn.createStatement().execute(teste);
+	}
+	
+	public void selectTeste(int id) {
+		String teste = "SELECT * FROM cliente WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+        ResultSet rs;
+		try {
+			String x;
+			rs = this.conn.createStatement().executeQuery(teste);			
+			rs.next();
+			
+			
+	        
+	        System.out.println(rs.getString("nome"));
+	        System.out.println(rs.getString("cadastro"));
+	        System.out.println(rs.getString("tipoPessoa"));
+	        System.out.println(rs.getString("telefone"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 	}
 	
 	public Connection getConn() {
