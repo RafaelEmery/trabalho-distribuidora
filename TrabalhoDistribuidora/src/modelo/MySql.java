@@ -2,11 +2,13 @@ package modelo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MySql {
 	
 	Connection conn;
+	StringBuilder newQuery = new StringBuilder();
 	
 	public MySql(String url, String user, String password) {
 		  
@@ -173,6 +175,44 @@ public class MySql {
 
 	public void setConn(Connection conn) {
 		this.conn = conn;
+	}
+	
+	/**
+	 * Métodos padrões para serem utilizados nas classes
+	 * @author Cassio Fernandes
+	 */
+	public MySql select(String tableName) {
+		String query = "SELECT * FROM " + tableName + "\n";
+		this.queryBuilder(query);
+		return this;
+	}
+	
+	public MySql where(String campo, String operador, String valor) {
+		String query = " WHERE " + campo + " " + operador + " " + valor + "\n";
+		this.queryBuilder(query);
+		return this;
+	}
+	
+	public MySql limit(int limit) {
+		String query = " LIMIT " + limit + "\n";
+		this.queryBuilder(query);
+		return this;
+	}
+	
+	public ResultSet get() throws SQLException {
+		this.queryBuilder(";");
+		String query = this.newQuery.toString();
+		this.clearQuery();
+		return this.conn.createStatement().executeQuery(query);
+	}
+	
+	public StringBuilder queryBuilder(String nextQuery) {
+		 newQuery.append(nextQuery);
+		 return newQuery;
+	}
+	
+	public void clearQuery() {
+		this.newQuery = new StringBuilder();
 	}
 		
 }

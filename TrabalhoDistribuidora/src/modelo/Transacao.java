@@ -3,7 +3,7 @@ package modelo;
 public abstract class Transacao {
 	private int quantidade;
 	private double valorUnitario;
-	private String produto;
+	private Produto produto;
 	
 	//Metodos construtores
 	public Transacao() throws Exception {
@@ -34,9 +34,15 @@ public abstract class Transacao {
 			throw new Exception("Valor unitario invalido");
 		}
 	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+	
 	public void setProduto(String produto) throws Exception {
 		if (produto.isEmpty() == false) {
-			this.produto = produto;
+//			if()
+//			this.produto = produto;
 		}
 		else {
 			throw new Exception("Produto invalido");
@@ -50,7 +56,7 @@ public abstract class Transacao {
 	public double getValorUnitario() {
 		return valorUnitario;
 	}
-	public String getProduto() {
+	public Produto getProduto() {
 		return produto;
 	}
 	
