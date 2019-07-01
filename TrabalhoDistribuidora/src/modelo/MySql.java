@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class MySql {
 	
@@ -222,6 +223,16 @@ public class MySql {
 		return this;
 	}
 	
+	public MySql orderBy(String campo, String ordenacao) {
+		String query = " ORDER BY " + campo + " " + ordenacao + "\n";
+		this.queryBuilder(query);
+		return this;
+	}
+	
+	public MySql orderBy(String campo) {
+		return this.orderBy(campo, "");		
+	}
+	
 	public ResultSet get() throws SQLException {
 		this.queryBuilder(";");
 		String query = this.newQuery.toString();
@@ -236,6 +247,36 @@ public class MySql {
 	
 	public void clearQuery() {
 		this.newQuery = new StringBuilder();
+	}
+	
+	public ResultSet create(String tableName, String[] campos, LinkedList<String> valores) throws SQLException{
+		StringBuilder query = new StringBuilder();
+		query.append("INSERT INTO ").append(tableName).append(" ");
+		query.append("(");
+		int i = 0;
+		for(String campo: campos) {
+			query.append(campo);
+			if(i < campos.length - 1) {
+				query.append(",");
+			}
+			i++;
+		}
+		query.append(") ");
+		query.append("VALUES ("); 
+		i = 0;
+		for(String valor: valores) {
+			query.append("\"").append(valor).append("\"");
+			if(i < valores.size() - 1) {
+				query.append(",");
+			}
+			i++;
+		}
+		query.append(");");
+		
+		System.out.println(query.toString());
+		this.conn.createStatement().execute(query.toString());
+		
+		return this.select(tableName).orderBy("id", "desc").limit(1).get();
 	}
 		
 }

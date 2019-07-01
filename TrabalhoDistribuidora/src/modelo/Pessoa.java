@@ -1,10 +1,11 @@
 package modelo;
 
-public abstract class Pessoa {
+public abstract class Pessoa extends Modelo{
 	private String nome;
 	private String cadastro;
 	private String telefone;
 	private int tipoPessoa;
+
 	
 	//Metodos construtores
 	public Pessoa() throws Exception {
