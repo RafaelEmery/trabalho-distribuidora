@@ -1,14 +1,19 @@
 package modelo;
 
+import java.sql.SQLException;
+import java.util.LinkedList;
+
 public abstract class Produto {
+	private static String tableName = "produto";
 	private double valor;
-	private int codigoDeBarra;
+	private String codigoDeBarra;
 	
-	//Metodos construtores
-	public Produto() throws Exception {
-		throw new Exception("Produto invalido");
-	}
-	public Produto(double valor, int codigoDeBarra) throws Exception {
+//	//Metodos construtores
+//	public Produto() throws Exception {
+//		throw new Exception("Produto invalido");
+//	}
+	
+	public Produto(double valor, String codigoDeBarra) throws Exception {
 		this.setValor(valor);
 		this.setCodigoDeBarra(codigoDeBarra);
 	}
@@ -17,7 +22,7 @@ public abstract class Produto {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public void setCodigoDeBarra(int codigoDeBarra) {
+	public void setCodigoDeBarra(String codigoDeBarra) {
 		this.codigoDeBarra = codigoDeBarra;
 	}
 	
@@ -25,7 +30,7 @@ public abstract class Produto {
 	public double getValor() {
 		return valor;
 	}
-	public int getCodigoDeBarra() {
+	public String getCodigoDeBarra() {
 		return codigoDeBarra;
 	}
 	
@@ -38,4 +43,23 @@ public abstract class Produto {
 		builder.append(this.getCodigoDeBarra());	
 		return builder.toString();
 	}
+	
+	public static String getTableName() {
+		return tableName;
+	}
+	
+//	public static LinkedList<Produto> all(MySql db) throws SQLException{
+//		LinkedList<Produto> lista = new LinkedList<Produto>();
+//		while(db.select(Produto.getTableName()).get().next()) {
+//			int id = rs.getInt("id");
+//	        String firstName = rs.getString("first_name");
+//	        String lastName = rs.getString("last_name");
+//	        Date dateCreated = rs.getDate("date_created");
+//	        boolean isAdmin = rs.getBoolean("is_admin");
+//	        int numPoints = rs.getInt("num_points");
+//		}
+//		return null;
+//	}
+	
+	
 }

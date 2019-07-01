@@ -37,7 +37,37 @@ public class TransacaoVenda extends Transacao{
 		return desconto;
 	}
 	
-	//Metodo equals 
+	/**
+	 * Método equals genérico que confere se os objetos são da mesma classe, caso sejam, chama um método específico
+	 * para TransacaoVenda, caso não sejam o mesmo, retorna false. 
+	 * @return boolean
+	 * @author Cassio Fernandes
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(this.getClass() == obj.getClass()) {
+			return this.equals((TransacaoVenda) obj);
+		} 
+		
+		return false;
+	}
+	
+	/**
+	 * Método equals específico para a classe TransacaoVenda, retorna true caso seus attributos sejam iguais.
+	 * @return boolean
+	 * @author Cassio Fernandes
+	 * 
+	 * NAO ESTA PRONTO!
+	 */
+	public boolean equals(TransacaoVenda obj) {
+		boolean equal = this.getCliente().equals(obj.getCliente());
+		equal = equal && this.getQuantidade() == obj.getQuantidade();
+		if(this.getCliente().equals(obj.getCliente()) && this.getQuantidade() == obj.getQuantidade()) {
+			return true;
+		}
+		
+		return false;
+	}
 	
 	//Metodo para atualizar o estoque
 	public void atualizaEstoque(int quantidade, String produto) {
