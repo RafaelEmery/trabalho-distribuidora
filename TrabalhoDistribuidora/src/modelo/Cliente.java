@@ -8,6 +8,7 @@ public class Cliente extends Pessoa {
 	
 	private static String tableName = "cliente";
 	private static String[] fillable = {"nome", "cadastro","tipoPessoa", "telefone"};
+	private static String[] labels = {"Nome", "Numero de Cadastro (CPF/CNPG/RG)","Tipo de Pessoa (Fisica/Juridica)", "Telefone"};
 	private int id;
 	
 	public Cliente(String nome, String cadastro, String telefone, int tipoPessoa) throws Exception {
@@ -71,12 +72,28 @@ public class Cliente extends Pessoa {
 		return Cliente.createFromDatabase(db.create(Cliente.getTableName(), Cliente.fillable, Cliente.createLinkedList(valores)));
 	}
 	
-	public static LinkedList<String> createLinkedList(String[] valores) throws Exception {
-		LinkedList<String> list = new LinkedList<String>();
-		for(String valor: valores) {
-			list.add(valor);
-		}
-		return list;
+	public void delete(MySql db) throws SQLException {
+		db.delete(Cliente.getTableName()).where("id", "=", this.id + "").executar();
+	}
+	
+	public Cliente update(MySql db, String[] valores) throws SQLException, Exception {
+		return Cliente.createFromDatabase(db.update(Cliente.getTableName(), this.fillable, Cliente.createLinkedList(valores), this.id));
+	}
+
+	@Override
+	String[] getFillable() {
+		return Cliente.fillable;
+	}
+
+	@Override
+	String[] getLabels() {
+		return labels;
+	}
+
+	@Override
+	String[] getValues() {
+		String[] values = {this.getNome(), this.getCadastro(), this.getTipoPessoa() + "", this.getTelefone()};
+		return values;
 	}
 	
 }

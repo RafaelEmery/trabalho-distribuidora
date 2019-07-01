@@ -3,7 +3,11 @@ package modelo;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 
-public abstract class Modelo implements IDbModelo {
+public abstract class Modelo {
+	
+	abstract String[] getFillable();
+	abstract String[] getLabels();
+	abstract String[] getValues();
 	
 	public static LinkedList<String> createLinkedList(String[] valores) throws Exception {
 		LinkedList<String> list = new LinkedList<String>();

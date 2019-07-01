@@ -240,6 +240,13 @@ public class MySql {
 		return this.conn.createStatement().executeQuery(query);
 	}
 	
+	public void executar() throws SQLException {
+		this.queryBuilder(";");
+		String query = this.newQuery.toString();
+		this.clearQuery();
+		this.conn.createStatement().execute(query);
+	}
+	
 	public StringBuilder queryBuilder(String nextQuery) {
 		 newQuery.append(nextQuery);
 		 return newQuery;
@@ -277,6 +284,30 @@ public class MySql {
 		this.conn.createStatement().execute(query.toString());
 		
 		return this.select(tableName).orderBy("id", "desc").limit(1).get();
+	}
+	
+	public ResultSet update(String tableName, String[] campos, LinkedList<String> valores, int id) throws SQLException{
+		StringBuilder query = new StringBuilder();
+		query.append("UPDATE ").append(tableName).append(" SET ");
+		int i = 0;
+		for(String valor: valores) {
+			query.append("`").append(campos[i]).append("` = \"").append(valor).append("\" ");
+			if(i < campos.length - 1) {
+				query.append(",");
+			}
+			i++;
+		}
+		query.append(" WHERE `id` = ").append(id).append(";");
+		
+		System.out.println(query.toString());
+		this.conn.createStatement().execute(query.toString());
+		
+		return this.select(tableName).where("id", "=", id + "").get();
+	}
+	
+	public MySql delete (String tableName) {
+		this.newQuery.append("DELETE FROM ").append(tableName).append("\n");
+		return this;
 	}
 		
 }
