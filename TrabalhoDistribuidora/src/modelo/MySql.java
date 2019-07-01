@@ -38,13 +38,13 @@ public class MySql {
 				"";
 		String fornecedor = "CREATE TABLE IF NOT EXISTS `fornecedor` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
-				"  `nome` varchar(45) NOT NULL,\n" + 
-				"  `cadastro` varchar(45) NOT NULL,\n" + 
+				"  `nome` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `cadastro` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `tipoPessoa` int(11) NOT NULL,\n" + 
-				"  `telefone` varchar(45) NOT NULL,\n" + 
-				"  `cidade` varchar(45) NOT NULL,\n" + 
-				"  `estado` varchar(45) NOT NULL,\n" + 
-				"  `empresa` varchar(45) NOT NULL,\n" + 
+				"  `telefone` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `cidade` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `estado` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `empresa` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `inedito` tinyint(4) DEFAULT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
@@ -56,11 +56,11 @@ public class MySql {
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n";
 		String produto = "CREATE TABLE IF NOT EXISTS `produto` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
-				"  `nome` varchar(45) NOT NULL,\n" + 
+				"  `nome` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `valor` double NOT NULL,\n" + 
-				"  `tipoCerveja` varchar(45) NOT NULL,\n" + 
+				"  `tipoCerveja` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `porcentagemAlcool` double NOT NULL,\n" + 
-				"  `codigoBarra` varchar(45) NOT NULL,\n" + 
+				"  `codigoBarra` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 		String transacao = "CREATE TABLE IF NOT EXISTS `transacao` (\n" + 
@@ -201,7 +201,7 @@ public class MySql {
 	}
 	
 	/**
-	 * Métodos padrões para serem utilizados nas classes
+	 * Mï¿½todos padrï¿½es para serem utilizados nas classes
 	 * @author Cassio Fernandes
 	 */
 	public MySql select(String tableName) {
