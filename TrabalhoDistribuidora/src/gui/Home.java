@@ -35,8 +35,10 @@ public class Home extends javax.swing.JFrame {
         miCriarCliente = new javax.swing.JMenuItem();
         miListarCliente = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         miCriarProduto = new javax.swing.JMenuItem();
         miListarProduto = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miCriarFormecedor = new javax.swing.JMenuItem();
         miListarFornecedor = new javax.swing.JMenuItem();
@@ -48,6 +50,7 @@ public class Home extends javax.swing.JFrame {
         miListarCompra = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Distribuidora Cana");
 
         jMenuBar1.setBackground(new java.awt.Color(160, 158, 149));
 
@@ -74,16 +77,23 @@ public class Home extends javax.swing.JFrame {
         jMenu1.setForeground(new java.awt.Color(1, 1, 1));
         jMenu1.setText("Produto");
 
+        jMenu6.setText("Cerveja");
+
         miCriarProduto.setText("Criar");
         miCriarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miCriarProdutoActionPerformed(evt);
             }
         });
-        jMenu1.add(miCriarProduto);
+        jMenu6.add(miCriarProduto);
 
         miListarProduto.setText("Listar");
-        jMenu1.add(miListarProduto);
+        jMenu6.add(miListarProduto);
+
+        jMenuItem1.setText("Estoque");
+        jMenu6.add(jMenuItem1);
+
+        jMenu1.add(jMenu6);
 
         jMenuBar1.add(jMenu1);
 
@@ -163,7 +173,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_miCriarClienteActionPerformed
 
     private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarProdutoActionPerformed
-        CervejaBL.criar(this);
+        ProdutoBL.criarCerveja(this);
     }//GEN-LAST:event_miCriarProdutoActionPerformed
 
     /**
@@ -207,7 +217,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem miCriarCliente;
     private javax.swing.JMenuItem miCriarCompra;
     private javax.swing.JMenuItem miCriarFormecedor;
