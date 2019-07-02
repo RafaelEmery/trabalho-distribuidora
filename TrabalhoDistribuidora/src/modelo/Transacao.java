@@ -1,19 +1,32 @@
 package modelo;
 
-public abstract class Transacao {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public abstract class Transacao extends Modelo {
+	private static String tableName = "transacao";
+	private static String[] fillable = {"idProduto", "idResponsavel","quant", "valor", "desconto"};
+	private static String[] labels = {"Produto", "Responsavel","Quantidade", "Valor", "Desconto"};
+	private int id;
+	
 	private int quantidade;
-	private double valorUnitario;
-	private Produto produto;
+	private double valor;
+	private double desconto;
+	private Cerveja produto;
+	private int responsavel;
+	
 	
 	//Metodos construtores
 	public Transacao() throws Exception {
 		throw new Exception("Transacao invalida");
 	}
 	
-	public Transacao(int quantidade, double valorUnitario, String produto) throws Exception {
+	public Transacao(Cerveja produto, int responsavel,int quantidade, double valor, double desconto) throws Exception {
 		this.setQuantidade(quantidade);
-		this.setValor(valorUnitario);
+		this.setValor(valor);
 		this.setProduto(produto);
+		this.setDesconto(desconto);
+		this.setResponsavel(responsavel);
 	}
 	
 	//Metodos set
@@ -28,14 +41,14 @@ public abstract class Transacao {
 	
 	public void setValor(double valorUnitario) throws Exception {
 		if (valorUnitario > 0) {
-			this.valorUnitario = valorUnitario;
+			this.valor = valorUnitario;
 		}
 		else {
 			throw new Exception("Valor unitario invalido");
 		}
 	}
 	
-	public void setProduto(Produto produto) {
+	public void setProduto(Cerveja produto) {
 		this.produto = produto;
 	}
 	
@@ -53,15 +66,31 @@ public abstract class Transacao {
 	public int getQuantidade() {
 		return quantidade;
 	}
-	public double getValorUnitario() {
-		return valorUnitario;
+	public double getValor() {
+		return valor;
 	}
-	public Produto getProduto() {
+	public Cerveja getProduto() {
 		return produto;
 	}
 	
 	//Metodo equals
 	
+	public double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
+	}
+
+	public int getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(int responsavel) {
+		this.responsavel = responsavel;
+	}
+
 	//Metodo para atualizar o estoque
 	public abstract void atualizaEstoque(int quantidade, String produto);
 	
@@ -76,11 +105,77 @@ public abstract class Transacao {
 		builder.append("\nQuantidade: ");
 		builder.append(this.getQuantidade());
 		builder.append(", Valor unitario: ");
-		builder.append(this.getValorUnitario());
+		builder.append(this.getValor());
 		builder.append(", Produto: ");
 		builder.append(this.getProduto());
 		return builder.toString();
 	}
 	
+	/**
+	 * Procura por um elemento especifico no banco de dados e o retorna como objeto Transacao
+	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
+	 * @author Cassio Fernandes
+	 */
+	public static Transacao find(int id) throws Exception {
+		ResultSet rs = Transacao.getConnection().select(Transacao.getTableName()).where("id", "=", id + "").get();
+		return Transacao.createFromDatabase(rs);
+	}
+	
+	public static String getTableName() {
+		return Transacao.tableName;
+	}
+
+	/**
+	 * Pega os dados necessarios de um ResultSet e cria um objeto Transacao a partir destes dados
+	 * @param rs
+	 * @return Transacao
+	 * @throws Exception
+	 */
+	public static Transacao createFromDatabase(ResultSet rs) throws Exception {
+		rs.next();
+		int id = rs.getInt("id");
+        int idProduto = rs.getInt("idProduto");
+        int idResponsavel = rs.getInt("idResponsavel");
+        int quant = rs.getInt("quant");
+        double valor = rs.getDouble("valor");
+        double desconto = rs.getDouble("desconto");
+        Transacao newObject;
+        if(valor < 0) {
+        	newObject = new TransacaoCompra(Cerveja.find(idProduto), idResponsavel, quant, valor, desconto);
+        } else {
+        	newObject = new TransacaoVenda(Cerveja.find(idProduto), idResponsavel, quant, valor, desconto);
+        }
+		newObject.id = id;
+		return newObject;
+	}
+	
+	public static Transacao create(String[] valores) throws Exception {
+		if(Integer.parseInt(valores[3]) > 0) {
+			//Corrigi estoque com Transacao Venda
+		} else {
+			//Corrige estoque com Transacao Compra
+		}
+		return Transacao.createFromDatabase(Transacao.getConnection().create(Transacao.getTableName(), Transacao.fillable, Transacao.createLinkedList(valores)));
+	}
+	
+	public void delete() throws SQLException {
+		Transacao.getConnection().delete(Transacao.getTableName()).where("id", "=", this.id + "").executar();
+	}
+	
+	@Override
+	public String[] getFillable() {
+		return Transacao.fillable;
+	}
+
+	@Override
+	public String[] getLabels() {
+		return labels;
+	}
+
+	@Override
+	public String[] getValues() {
+		String[] values = { this.getProduto().getId() + "", this.getResponsavel() + "", this.getQuantidade() + "", this.getValor() + "", this.getDesconto() + ""};
+		return values;
+	}
 	
 }

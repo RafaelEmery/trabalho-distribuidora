@@ -11,6 +11,8 @@ public class Uso {
 
 		MySql mysql = new MySql("jdbc:mysql://127.0.0.1:3306/dist?useTimezone=true&serverTimezone=UTC", "root", "root");
 		
+		Modelo.setConnection(mysql);
+		
 		Home home = new Home();
                 home.setVisible(true);
 	

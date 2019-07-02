@@ -1,6 +1,15 @@
 package modelo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+
 public class Fornecedor extends Pessoa {
+	private static String tableName = "fornecedor";
+	private static String[] fillable = {"nome", "cadastro","tipoPessoa", "telefone", "cidade", "estado", "empresa", "inedito"};
+	private static String[] labels = {"Nome", "Numero de Cadastro (CPF/CNPG/RG)","Tipo de Pessoa (Fisica/Juridica)", "Telefone", "Cidade", "Estado", "Empresa", "Inédito"};
+	private int id;
+	
 	private String cidade;
 	private String estado;
 	private String empresa;
@@ -83,4 +92,86 @@ public class Fornecedor extends Pessoa {
 		builder.append(this.isInedito());
 		return builder.toString();
 	}	
+	
+	/**
+	 * Pega todos os registros da tabela da classe e retorna eles em uma linked list de objetos cerveja
+	 * @param db - banco de dados que esta sendo utilizado
+	 * @return LinkedList<Produto>
+	 * @author Cassio Fernandes
+	 * @throws Exception - Caso nao seja possivel criar um objeto Fornecedor a partir dos dados do banco de dados
+	 */
+	public static LinkedList<Pessoa> all() throws Exception{
+		LinkedList<Pessoa> lista = new LinkedList<Pessoa>();
+		ResultSet rs = Fornecedor.getConnection().select(Fornecedor.getTableName()).get();
+		while(rs.next()) {
+			lista.add(Fornecedor.createFromDatabase(rs));
+		}
+		return lista;
+	}
+	
+	private static String getTableName() {
+		return Fornecedor.tableName;
+	}
+
+	/**
+	 * Procura por um elemento especifico no banco de dados e o retorna como objeto Fornecedor
+	 * @throws Exception - Caso nao seja possivel criar um objeto Fornecedor a partir dos dados do banco de dados
+	 * @author Cassio Fernandes
+	 */
+	public static Fornecedor find(int id) throws Exception {
+		ResultSet rs = Fornecedor.getConnection().select(Fornecedor.getTableName()).where("id", "=", id + "").get();
+		return Fornecedor.createFromDatabase(rs);
+	}
+	
+	/**
+	 * Pega os dados necessarios de um ResultSet e cria um objeto Fornecedor a partir destes dados
+	 * @param rs
+	 * @return Fornecedor
+	 * @throws Exception
+	 */
+	public static Fornecedor createFromDatabase(ResultSet rs) throws Exception {
+		rs.next();
+		int id = rs.getInt("id");
+        String nome = rs.getString("nome");
+        int tipoPessoa = rs.getInt("tipoPessoa");
+        String cadastro = rs.getString("cadastro");
+        String telefone = rs.getString("telefone");
+        String cidade = rs.getString("cidade");
+        String estado = rs.getString("estado");
+        String empresa = rs.getString("empresa");
+        boolean inedito = rs.getBoolean("inedito");
+        Fornecedor newObject;
+		newObject = new Fornecedor(nome, cadastro, telefone, tipoPessoa, cidade, estado, empresa, inedito);
+		newObject.id = id;
+		return newObject;
+	}
+	
+	public static Fornecedor create( String[] valores) throws Exception {
+		return Fornecedor.createFromDatabase(Fornecedor.getConnection().create(Fornecedor.getTableName(), Fornecedor.fillable, Fornecedor.createLinkedList(valores)));
+	}
+	
+	public void delete() throws SQLException {
+		Fornecedor.getConnection().delete(Fornecedor.getTableName()).where("id", "=", this.id + "").executar();
+	}
+	
+	public Fornecedor update(String[] valores) throws SQLException, Exception {
+		return Fornecedor.createFromDatabase(Fornecedor.getConnection().update(Fornecedor.getTableName(), this.fillable, Fornecedor.createLinkedList(valores), this.id));
+	}
+
+	@Override
+	public String[] getFillable() {
+		return Fornecedor.fillable;
+	}
+
+	@Override
+	public String[] getLabels() {
+		return labels;
+	}
+
+	@Override
+	public String[] getValues() {
+		String[] values = {this.getNome(), this.getCadastro(), this.getTipoPessoa() + "", this.getTelefone(), this.getCidade(), this.getEstado(), this.getEmpresa(), this.isInedito() + ""};
+		return values;
+	}
+	
 }
