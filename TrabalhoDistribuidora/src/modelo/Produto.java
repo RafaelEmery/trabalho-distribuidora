@@ -3,15 +3,15 @@ package modelo;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-public abstract class Produto {
+public abstract class Produto extends Modelo {
 	private static String tableName = "produto";
 	private double valor;
 	private String codigoDeBarra;
 	
 //	//Metodos construtores
-//	public Produto() throws Exception {
-//		throw new Exception("Produto invalido");
-//	}
+	public Produto() {
+            
+	}
 	
 	public Produto(double valor, String codigoDeBarra) throws Exception {
 		this.setValor(valor);

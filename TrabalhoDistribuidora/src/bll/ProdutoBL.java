@@ -5,6 +5,10 @@
  */
 package bll;
 
+import gui.Detalhes;
+import java.awt.Component;
+import modelo.Produto;
+
 /**
  *
  * @author joao

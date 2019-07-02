@@ -7,8 +7,8 @@ public class Fornecedor extends Pessoa {
 	private boolean inedito;
 	
 	//Metodos construtores
-	public Fornecedor() throws Exception {
-		super();
+	public Fornecedor() {
+            super();
 	}
 	
 	public Fornecedor(String nome, String cadastro, String telefone, int tipoPessoa, String cidade, String estado, String empresa, boolean inedito) throws Exception {

@@ -6,6 +6,7 @@
 package gui;
 
 import javax.swing.JOptionPane;
+import bll.*;
 
 /**
  *
@@ -30,82 +31,102 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        miCriarCliente = new javax.swing.JMenuItem();
+        miListarCliente = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        miCriarProduto = new javax.swing.JMenuItem();
+        miListarProduto = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        miCriarFormecedor = new javax.swing.JMenuItem();
+        miListarFornecedor = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        miCriarVenda = new javax.swing.JMenuItem();
+        miListarVenda = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        miCriarCompra = new javax.swing.JMenuItem();
+        miListarCompra = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jMenuBar1.setBackground(new java.awt.Color(160, 158, 149));
+
+        jMenu5.setText("Cliente");
+
+        miCriarCliente.setText("Criar");
+        miCriarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCriarClienteActionPerformed(evt);
+            }
+        });
+        jMenu5.add(miCriarCliente);
+
+        miListarCliente.setText("Listar");
+        miListarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarClienteActionPerformed(evt);
+            }
+        });
+        jMenu5.add(miListarCliente);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu1.setForeground(new java.awt.Color(1, 1, 1));
         jMenu1.setText("Produto");
 
-        jMenuItem8.setText("Criar");
-        jMenu1.add(jMenuItem8);
+        miCriarProduto.setText("Criar");
+        miCriarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCriarProdutoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(miCriarProduto);
 
-        jMenuItem10.setText("Editar");
-        jMenu1.add(jMenuItem10);
-
-        jMenuItem9.setText("Ver");
-        jMenu1.add(jMenuItem9);
+        miListarProduto.setText("Listar");
+        jMenu1.add(miListarProduto);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setForeground(new java.awt.Color(1, 1, 1));
         jMenu2.setText("Fornecedor");
 
-        jMenuItem1.setText("Criar");
-        jMenu2.add(jMenuItem1);
+        miCriarFormecedor.setText("Criar");
+        jMenu2.add(miCriarFormecedor);
 
-        jMenuItem2.setText("Editar");
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem5.setText("Ver");
-        jMenu2.add(jMenuItem5);
+        miListarFornecedor.setText("Listar");
+        jMenu2.add(miListarFornecedor);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setForeground(new java.awt.Color(1, 1, 1));
         jMenu3.setText("Vendas");
 
-        jMenuItem3.setText("Realizar");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        miCriarVenda.setText("Realizar");
+        miCriarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                miCriarVendaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenu3.add(miCriarVenda);
 
-        jMenuItem4.setText("Ver");
-        jMenu3.add(jMenuItem4);
+        miListarVenda.setText("Listar");
+        jMenu3.add(miListarVenda);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setForeground(new java.awt.Color(1, 1, 1));
         jMenu4.setText("Compras");
 
-        jMenuItem6.setText("Realizar");
-        jMenu4.add(jMenuItem6);
+        miCriarCompra.setText("Realizar");
+        jMenu4.add(miCriarCompra);
 
-        jMenuItem7.setText("Ver");
-        jMenu4.add(jMenuItem7);
+        miListarCompra.setText("Listar");
+        miListarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarCompraActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miListarCompra);
 
         jMenuBar1.add(jMenu4);
 
@@ -115,23 +136,35 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 514, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 201, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarVendaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_miCriarVendaActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-    }//GEN-LAST:event_formWindowOpened
+    private void miListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarClienteActionPerformed
+        ClienteBL.listar();
+    }//GEN-LAST:event_miListarClienteActionPerformed
+
+    private void miListarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miListarCompraActionPerformed
+
+    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarClienteActionPerformed
+        ClienteBL.criar(this);
+    }//GEN-LAST:event_miCriarClienteActionPerformed
+
+    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarProdutoActionPerformed
+        CervejaBL.criar(this);
+    }//GEN-LAST:event_miCriarProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,16 +206,17 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem miCriarCliente;
+    private javax.swing.JMenuItem miCriarCompra;
+    private javax.swing.JMenuItem miCriarFormecedor;
+    private javax.swing.JMenuItem miCriarProduto;
+    private javax.swing.JMenuItem miCriarVenda;
+    private javax.swing.JMenuItem miListarCliente;
+    private javax.swing.JMenuItem miListarCompra;
+    private javax.swing.JMenuItem miListarFornecedor;
+    private javax.swing.JMenuItem miListarProduto;
+    private javax.swing.JMenuItem miListarVenda;
     // End of variables declaration//GEN-END:variables
 }
