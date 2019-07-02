@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class TransacaoCompra extends Transacao {
 	private Fornecedor fornecedor;
 	
-	public TransacaoCompra(Produto produto, int responsavel, int quant, double valor, double desconto) throws Exception {
+	public TransacaoCompra(Cerveja produto, int responsavel, int quant, double valor, double desconto) throws Exception {
 		super(produto, responsavel, quant, valor, desconto);
 		this.setFornecedor(Fornecedor.find(this.getResponsavel()));
 	}
@@ -34,6 +34,24 @@ public class TransacaoCompra extends Transacao {
 			lista.add(Transacao.createFromDatabase(rs));
 		}
 		return lista;
+	}
+
+	@Override
+	public void atualizaEstoque(int quantidade, String produto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void atualizaCaixa(int quantidade, double valor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double calculaValor(int quantidade, double valorUnitario) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

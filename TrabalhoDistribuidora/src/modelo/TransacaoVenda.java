@@ -8,7 +8,7 @@ public class TransacaoVenda extends Transacao{
 		super();
 	}
 	
-	public TransacaoVenda(Produto produto, int responsavel, int quant, double valor, double desconto) throws Exception {
+	public TransacaoVenda(Cerveja produto, int responsavel, int quant, double valor, double desconto) throws Exception {
 		super(produto, responsavel, quant, valor, desconto);
 		this.setCliente(Cliente.find(this.getResponsavel()));
 	}
