@@ -98,6 +98,7 @@ public class Cerveja extends Produto {
 	 * @throws Exception
 	 */
 	public static Cerveja createFromDatabase(ResultSet rs) throws Exception {
+		rs.next();
 		int id = rs.getInt("id");
         String nome = rs.getString("nome");
         double porcentagemAlcool = rs.getDouble("porcentagemAlcool");

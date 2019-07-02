@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class MySql {
 	
@@ -29,21 +30,22 @@ public class MySql {
 		
 		String cliente = "CREATE TABLE IF NOT EXISTS `cliente` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
-				"  `nome` varchar(45) NOT NULL,\n" + 
-				"  `cadastro` varchar(45) NOT NULL,\n" + 
+				"  `nome` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `cadastro` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `tipoPessoa` int(11) NOT NULL,\n" + 
-				"  `telefone` varchar(45) NOT NULL,\n" + 
+				"  `telefone` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
-				") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+				") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;\n" + 
+				"";
 		String fornecedor = "CREATE TABLE IF NOT EXISTS `fornecedor` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
-				"  `nome` varchar(45) NOT NULL,\n" + 
-				"  `cadastro` varchar(45) NOT NULL,\n" + 
+				"  `nome` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `cadastro` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `tipoPessoa` int(11) NOT NULL,\n" + 
-				"  `telefone` varchar(45) NOT NULL,\n" + 
-				"  `cidade` varchar(45) NOT NULL,\n" + 
-				"  `estado` varchar(45) NOT NULL,\n" + 
-				"  `empresa` varchar(45) NOT NULL,\n" + 
+				"  `telefone` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `cidade` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `estado` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
+				"  `empresa` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `inedito` tinyint(4) DEFAULT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
@@ -55,11 +57,11 @@ public class MySql {
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n";
 		String produto = "CREATE TABLE IF NOT EXISTS `produto` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 
-				"  `nome` varchar(45) NOT NULL,\n" + 
+				"  `nome` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `valor` double NOT NULL,\n" + 
-				"  `tipoCerveja` varchar(45) NOT NULL,\n" + 
+				"  `tipoCerveja` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  `porcentagemAlcool` double NOT NULL,\n" + 
-				"  `codigoBarra` varchar(45) NOT NULL,\n" + 
+				"  `codigoBarra` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
 				") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 		String transacao = "CREATE TABLE IF NOT EXISTS `transacao` (\n" + 
@@ -169,6 +171,28 @@ public class MySql {
 		this.conn.createStatement().execute(teste);
 	}
 	
+	public void selectTeste(int id) {
+		String teste = "SELECT * FROM cliente WHERE id = "+id+"\n" + 
+				"ORDER BY id LIMIT 1;";
+        ResultSet rs;
+		try {
+			String x;
+			rs = this.conn.createStatement().executeQuery(teste);			
+			rs.next();
+			
+			
+	        
+	        System.out.println(rs.getString("nome"));
+	        System.out.println(rs.getString("cadastro"));
+	        System.out.println(rs.getString("tipoPessoa"));
+	        System.out.println(rs.getString("telefone"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+	}
+	
 	public Connection getConn() {
 		return conn;
 	}
@@ -178,7 +202,7 @@ public class MySql {
 	}
 	
 	/**
-	 * Métodos padrões para serem utilizados nas classes
+	 * Mï¿½todos padrï¿½es para serem utilizados nas classes
 	 * @author Cassio Fernandes
 	 */
 	public MySql select(String tableName) {
@@ -199,11 +223,28 @@ public class MySql {
 		return this;
 	}
 	
+	public MySql orderBy(String campo, String ordenacao) {
+		String query = " ORDER BY " + campo + " " + ordenacao + "\n";
+		this.queryBuilder(query);
+		return this;
+	}
+	
+	public MySql orderBy(String campo) {
+		return this.orderBy(campo, "");		
+	}
+	
 	public ResultSet get() throws SQLException {
 		this.queryBuilder(";");
 		String query = this.newQuery.toString();
 		this.clearQuery();
 		return this.conn.createStatement().executeQuery(query);
+	}
+	
+	public void executar() throws SQLException {
+		this.queryBuilder(";");
+		String query = this.newQuery.toString();
+		this.clearQuery();
+		this.conn.createStatement().execute(query);
 	}
 	
 	public StringBuilder queryBuilder(String nextQuery) {
@@ -213,6 +254,60 @@ public class MySql {
 	
 	public void clearQuery() {
 		this.newQuery = new StringBuilder();
+	}
+	
+	public ResultSet create(String tableName, String[] campos, LinkedList<String> valores) throws SQLException{
+		StringBuilder query = new StringBuilder();
+		query.append("INSERT INTO ").append(tableName).append(" ");
+		query.append("(");
+		int i = 0;
+		for(String campo: campos) {
+			query.append(campo);
+			if(i < campos.length - 1) {
+				query.append(",");
+			}
+			i++;
+		}
+		query.append(") ");
+		query.append("VALUES ("); 
+		i = 0;
+		for(String valor: valores) {
+			query.append("\"").append(valor).append("\"");
+			if(i < valores.size() - 1) {
+				query.append(",");
+			}
+			i++;
+		}
+		query.append(");");
+		
+		System.out.println(query.toString());
+		this.conn.createStatement().execute(query.toString());
+		
+		return this.select(tableName).orderBy("id", "desc").limit(1).get();
+	}
+	
+	public ResultSet update(String tableName, String[] campos, LinkedList<String> valores, int id) throws SQLException{
+		StringBuilder query = new StringBuilder();
+		query.append("UPDATE ").append(tableName).append(" SET ");
+		int i = 0;
+		for(String valor: valores) {
+			query.append("`").append(campos[i]).append("` = \"").append(valor).append("\" ");
+			if(i < campos.length - 1) {
+				query.append(",");
+			}
+			i++;
+		}
+		query.append(" WHERE `id` = ").append(id).append(";");
+		
+		System.out.println(query.toString());
+		this.conn.createStatement().execute(query.toString());
+		
+		return this.select(tableName).where("id", "=", id + "").get();
+	}
+	
+	public MySql delete (String tableName) {
+		this.newQuery.append("DELETE FROM ").append(tableName).append("\n");
+		return this;
 	}
 		
 }

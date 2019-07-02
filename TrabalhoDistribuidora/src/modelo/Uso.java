@@ -8,11 +8,31 @@ public class Uso {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		MySql mysql = new MySql("jdbc:mysql://127.0.0.1:3306/dist?useTimezone=true&serverTimezone=UTC", "root", "");
+
+		MySql mysql = new MySql("jdbc:mysql://127.0.0.1:3306/dist?useTimezone=true&serverTimezone=UTC", "root", "root");
 		
 		Home home = new Home();
                 home.setVisible(true);
-//		
+	
+        try {
+			Cliente cliente = Cliente.find(mysql, 4);
+			String[] valores = {"asudhaushd","asdausdh", "3",cliente.getTelefone()};
+			cliente.update(mysql, valores);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+                
+//        String[] valores = {"Arlon Scheidegger", "154.011.727-88", "0", "(027)999770749"};
+//        try {
+//			System.out.println(Cliente.create(mysql, valores).toString());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+                
 //		try {
 //			mysql.inserirCliente("Arlon", "154.011.727-88", 1, "(27)9-9977-0749");
 //			mysql.inserirFornecedor("Arlon", "154.011.727-88", 1, "(27)9-9977-0749", "Nova Venécia", "ES","Scheidegger", 1);
