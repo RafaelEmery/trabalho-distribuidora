@@ -19,6 +19,10 @@ public class Cliente extends Pessoa {
         super(nome, cadastro, telefone, tipoPessoa);
     }
 
+    public static String getTableName() {
+        return tableName;
+    }
+
     /**
      * Pega todos os registros da tabela da classe e retorna eles em uma linked list de objetos pessoa
      * @param db - banco de dados que esta sendo utilizado
