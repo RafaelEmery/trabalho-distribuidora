@@ -6,6 +6,8 @@
 package gui.cliente;
 
 import gui.Detalhes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import modelo.Cliente;
 import modelo.MySql;
@@ -98,14 +100,19 @@ public class Listar extends javax.swing.JFrame {
 
     private void ltItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ltItemMouseClicked
         if (evt.getClickCount() == 2) {
+            
             Cliente cliente = (Cliente)((JList)evt.getSource()).getSelectedValue();
-            Detalhes.showInputsDialog(this, cliente, "Alterar Cliente");
+            try {
+                cliente.update(Detalhes.showInputsDialog(this, cliente, "Alterar Cliente"));
+                this.ltItem.setListData(Cliente.all().toArray());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+            }
         }
     }//GEN-LAST:event_ltItemMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try{
-        	System.out.println("!@#@!#!@#!@#!@#");
             this.ltItem.setListData(Cliente.all().toArray());
         }
         catch(Exception e){

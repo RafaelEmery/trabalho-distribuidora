@@ -80,7 +80,9 @@ public class Cliente extends Pessoa {
     }
 
     public Cliente update(String[] valores) throws SQLException, Exception {
-        return Cliente.createFromDatabase(Cliente.getConnection().update(Cliente.getTableName(), this.fillable, Cliente.createLinkedList(valores), this.id));
+        ResultSet rs = Cliente.getConnection().update(Cliente.getTableName(), this.fillable, Cliente.createLinkedList(valores), this.id);
+        rs.next();
+        return Cliente.createFromDatabase(rs);
     }
 
     @Override
