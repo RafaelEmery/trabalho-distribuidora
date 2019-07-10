@@ -11,6 +11,10 @@ public class TransacaoCompra extends Transacao {
 		super();
 	}
 	
+	public TransacaoCompra (Cerveja cerveja, double valor) {
+		super(cerveja, valor);
+	}
+	
 	public TransacaoCompra(Cerveja produto, int responsavel, int quant, double valor, double desconto) throws Exception {
 		super(produto, responsavel, quant, valor, desconto);
 		this.setFornecedor(Fornecedor.find(this.getResponsavel()));

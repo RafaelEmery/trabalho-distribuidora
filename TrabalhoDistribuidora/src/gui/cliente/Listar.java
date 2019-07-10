@@ -105,6 +105,7 @@ public class Listar extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try{
+        	System.out.println("!@#@!#!@#!@#!@#");
             this.ltItem.setListData(Cliente.all().toArray());
         }
         catch(Exception e){

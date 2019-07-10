@@ -7,9 +7,7 @@ package bll;
 
 import java.awt.Component;
 
-import gui.Detalhes;
 import gui.transacaoVenda.Listar;
-import modelo.TransacaoVenda;
 
 /**
  *
@@ -17,7 +15,6 @@ import modelo.TransacaoVenda;
  */
 public class TransacaoVendaBL {
 	public static void criarTransacao(Component parent) throws Exception{
-        TransacaoVenda transacao = new TransacaoVenda();
         Listar form = new Listar();
         form.setVisible(true);
     }

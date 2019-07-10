@@ -4,8 +4,6 @@ import gui.Detalhes;
 import javax.swing.*;
 
 import modelo.Cerveja;
-import modelo.Cliente;
-import modelo.MySql;
 import modelo.Transacao;
 import modelo.TransacaoCompra;
 /**
@@ -103,9 +101,8 @@ public class Listar extends javax.swing.JFrame {
     private void ltItemMouseClicked(java.awt.event.MouseEvent evt) throws Exception {//GEN-FIRST:event_ltItemMouseClicked
         if (evt.getClickCount() == 2) {
             Cerveja cerveja = (Cerveja)((JList)evt.getSource()).getSelectedValue();
-            Transacao transacao = new TransacaoCompra();
-            transacao.setProduto(cerveja);
-            transacao = TransacaoCompra.create(Detalhes.showInputsDialog(this, transacao, "Produto para transação de Venda"));
+            Transacao transacao = new TransacaoCompra(cerveja, -1);
+            transacao = TransacaoCompra.create(Detalhes.showInputsDialog(this, transacao, "Produto para transação de Compra"));
             transacao.setValor(transacao.getProduto().getValor() * -1);
             transacao.update(transacao.getValues());
         }

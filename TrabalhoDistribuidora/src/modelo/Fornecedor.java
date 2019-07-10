@@ -7,25 +7,25 @@ import java.util.LinkedList;
 public class Fornecedor extends Pessoa {
 	private static String tableName = "fornecedor";
 	private static String[] fillable = {"nome", "cadastro","tipoPessoa", "telefone", "cidade", "estado", "empresa", "inedito"};
-	private static String[] labels = {"Nome", "Numero de Cadastro (CPF/CNPG/RG)","Tipo de Pessoa (Fisica/Juridica)", "Telefone", "Cidade", "Estado", "Empresa", "Inédito"};
+	private static String[] labels = {"Nome", "Numero de Cadastro (CPF/CNPG/RG)","Tipo de Pessoa (Fisica/Juridica)", "Telefone", "Cidade", "Estado", "Empresa", "Inï¿½dito"};
 	private int id;
 	
 	private String cidade;
 	private String estado;
 	private String empresa;
-	private boolean inedito;
+	private int inedito;
 	
 	//Metodos construtores
 	public Fornecedor() {
             super();
 	}
 	
-	public Fornecedor(String nome, String cadastro, String telefone, int tipoPessoa, String cidade, String estado, String empresa, boolean inedito) throws Exception {
+	public Fornecedor(String nome, String cadastro, String telefone, int tipoPessoa, String cidade, String estado, String empresa, int inedito2) throws Exception {
 		super(nome, cadastro, telefone, tipoPessoa);
 		this.setCidade(cidade);
 		this.setEstado(estado);
 		this.setEmpresa(empresa);
-		this.setInedito(inedito);
+		this.setInedito(inedito2);
 	}
 	
 	//Metodos set
@@ -53,7 +53,7 @@ public class Fornecedor extends Pessoa {
 			throw new Exception("Empresa invalida");
 		}
 	}
-	public void setInedito(boolean inedito) throws Exception {
+	public void setInedito(int inedito) throws Exception {
 		this.inedito = inedito;
 	}
 	
@@ -67,7 +67,7 @@ public class Fornecedor extends Pessoa {
 	public String getEmpresa() {
 		return empresa;
 	}
-	public boolean isInedito() {
+	public int isInedito() {
 		return inedito;
 	}
 	
@@ -120,6 +120,7 @@ public class Fornecedor extends Pessoa {
 	 */
 	public static Fornecedor find(int id) throws Exception {
 		ResultSet rs = Fornecedor.getConnection().select(Fornecedor.getTableName()).where("id", "=", id + "").get();
+		rs.next();
 		return Fornecedor.createFromDatabase(rs);
 	}
 	
@@ -130,7 +131,7 @@ public class Fornecedor extends Pessoa {
 	 * @throws Exception
 	 */
 	public static Fornecedor createFromDatabase(ResultSet rs) throws Exception {
-		rs.next();
+//		rs.next();
 		int id = rs.getInt("id");
         String nome = rs.getString("nome");
         int tipoPessoa = rs.getInt("tipoPessoa");
@@ -139,7 +140,7 @@ public class Fornecedor extends Pessoa {
         String cidade = rs.getString("cidade");
         String estado = rs.getString("estado");
         String empresa = rs.getString("empresa");
-        boolean inedito = rs.getBoolean("inedito");
+        int inedito = rs.getInt("inedito");
         Fornecedor newObject;
 		newObject = new Fornecedor(nome, cadastro, telefone, tipoPessoa, cidade, estado, empresa, inedito);
 		newObject.id = id;
@@ -147,7 +148,9 @@ public class Fornecedor extends Pessoa {
 	}
 	
 	public static Fornecedor create( String[] valores) throws Exception {
-		return Fornecedor.createFromDatabase(Fornecedor.getConnection().create(Fornecedor.getTableName(), Fornecedor.fillable, Fornecedor.createLinkedList(valores)));
+		ResultSet rs = Fornecedor.getConnection().create(Fornecedor.getTableName(), Fornecedor.fillable, Fornecedor.createLinkedList(valores));
+		rs.next();
+		return Fornecedor.createFromDatabase(rs);
 	}
 	
 	public void delete() throws SQLException {
