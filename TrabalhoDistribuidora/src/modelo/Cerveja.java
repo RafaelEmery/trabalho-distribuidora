@@ -16,9 +16,9 @@ public class Cerveja extends Produto {
 	private double porcentagemAlcool;
 	
 	//Metodos construtores
-//	public Cerveja() throws Exception {
-//		super();
-//	}
+	public Cerveja() {
+            
+	}
 	
 	/**
 	 * 
