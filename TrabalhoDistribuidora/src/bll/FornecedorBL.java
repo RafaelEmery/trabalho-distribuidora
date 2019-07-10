@@ -3,7 +3,7 @@ package bll;
 
 import modelo.Fornecedor;
 import gui.Detalhes;
-import gui.cliente.Listar;
+import gui.fornecedor.Listar;
 import java.awt.Component;
 
 /**

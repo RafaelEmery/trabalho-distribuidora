@@ -103,7 +103,7 @@ public class Criar extends javax.swing.JFrame {
             Cerveja cerveja = (Cerveja)((JList)evt.getSource()).getSelectedValue();
             Transacao transacao = new TransacaoCompra(cerveja, -1);
             transacao = TransacaoCompra.create(Detalhes.showInputsDialog(this, transacao, "Produto para transação de Compra"));
-            transacao.setValor(transacao.getProduto().getValor() * -1);
+            transacao.setValor(cerveja.getValor() * -1);
             transacao.update(transacao.getValues());
         }
     }//GEN-LAST:event_ltItemMouseClicked

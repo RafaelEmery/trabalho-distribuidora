@@ -2,6 +2,7 @@ package modelo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public abstract class Transacao extends Modelo {
 	private static String tableName = "transacao";
@@ -123,6 +124,23 @@ public abstract class Transacao extends Modelo {
 		return builder.toString();
 	}
 	
+        
+        /**
+	 * Pega todos os registros da tabela da classe e retorna eles em uma linked list de objetos cerveja
+	 * @param db - banco de dados que esta sendo utilizado
+	 * @return LinkedList<Transacao>
+	 * @author João vitor Barros Farias 5:56 AM
+	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
+	 */
+	public static LinkedList<Transacao> all() throws Exception{
+		LinkedList<Transacao> lista = new LinkedList<>();
+		ResultSet rs = Transacao.getConnection().select(Transacao.getTableName()).get();
+		while(rs.next()) {
+			lista.add(Transacao.createFromDatabase(rs));
+		}
+		return lista;
+	}
+        
 	/**
 	 * Procura por um elemento especifico no banco de dados e o retorna como objeto Transacao
 	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
@@ -162,20 +180,24 @@ public abstract class Transacao extends Modelo {
 	}
 	
 	public static Transacao create(String[] valores) throws Exception {
-		if(Double.parseDouble(valores[3]) < 0) {
-			//Corrigi estoque com Transacao Venda
-			ItemDeEstoque item = ItemDeEstoque.find(Integer.parseInt(valores[0]));
-			item.incrementaEstoque(Integer.parseInt(valores[2]));
-			item.update(item.getValues());
-			
-		} else {
-			//Corrige estoque com Transacao Compra
-			ItemDeEstoque item = ItemDeEstoque.find(Integer.parseInt(valores[0]));
-			if(item.decrementaEstoque(Integer.parseInt(valores[2]))) {
-				item.update(item.getValues());
-			}
-		}
-		return Transacao.createFromDatabase(Transacao.getConnection().create(Transacao.getTableName(), Transacao.fillable, Transacao.createLinkedList(valores)));
+            boolean alterado = false;
+            if(Double.parseDouble(valores[3]) < 0) {
+                    //Corrigi estoque com Transacao Venda
+                    ItemDeEstoque item = ItemDeEstoque.find(Integer.parseInt(valores[0]));
+                    item.incrementaEstoque(Integer.parseInt(valores[2]));
+                    alterado = true;
+
+            } else {
+                    //Corrige estoque com Transacao Compra
+                    ItemDeEstoque item = ItemDeEstoque.find(Integer.parseInt(valores[0]));
+                    alterado = item.decrementaEstoque(Integer.parseInt(valores[2]));
+            }
+            if (alterado) {
+                return Transacao.createFromDatabase(Transacao.getConnection().create(Transacao.getTableName(), Transacao.fillable, Transacao.createLinkedList(valores)));
+            }
+            else{
+                return null;
+            }
 	}
 	
 	public void delete() throws SQLException {
@@ -185,7 +207,7 @@ public abstract class Transacao extends Modelo {
         public static float somarValores() throws Exception{
             ResultSet rs = Transacao.getConnection().conn.createStatement().executeQuery("SELECT sum(valor) FROM dist.transacao;");
             rs.next();
-            return rs.getFloat(0);
+            return rs.getFloat(1);
         }
 	
 	@Override
