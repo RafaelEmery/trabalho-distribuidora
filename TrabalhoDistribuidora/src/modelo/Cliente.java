@@ -20,7 +20,7 @@ public class Cliente extends Pessoa {
     }
 
     public static String getTableName() {
-        return tableName;
+        return Cliente.tableName;
     }
 
     /**
