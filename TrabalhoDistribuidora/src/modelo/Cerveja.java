@@ -88,8 +88,10 @@ public class Cerveja extends Produto {
 	
 	/**
 	 * Procura por um elemento especifico no banco de dados e o retorna como objeto Cerveja
+         * @param id
 	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
 	 * @author Cassio Fernandes
+         * @return 
 	 */
 	public static Cerveja find(int id) throws Exception {
 		ResultSet rs = Cerveja.getConnection().select(Produto.getTableName()).where("id", "=", id + "").get();
