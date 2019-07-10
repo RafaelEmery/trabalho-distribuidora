@@ -38,7 +38,7 @@ public class Home extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         miCriarProduto = new javax.swing.JMenuItem();
         miListarProduto = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        miListarEstoque = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miCriarFormecedor = new javax.swing.JMenuItem();
         miListarFornecedor = new javax.swing.JMenuItem();
@@ -59,12 +59,7 @@ public class Home extends javax.swing.JFrame {
         miCriarCliente.setText("Criar");
         miCriarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarClienteActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarClienteActionPerformed(evt);
             }
         });
         jMenu5.add(miCriarCliente);
@@ -87,21 +82,26 @@ public class Home extends javax.swing.JFrame {
         miCriarProduto.setText("Criar");
         miCriarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarProdutoActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarProdutoActionPerformed(evt);
             }
         });
         jMenu6.add(miCriarProduto);
 
         miListarProduto.setText("Listar");
+        miListarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarProdutoActionPerformed(evt);
+            }
+        });
         jMenu6.add(miListarProduto);
 
-        jMenuItem1.setText("Estoque");
-        jMenu6.add(jMenuItem1);
+        miListarEstoque.setText("Estoque");
+        miListarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarEstoqueActionPerformed(evt);
+            }
+        });
+        jMenu6.add(miListarEstoque);
 
         jMenu1.add(jMenu6);
 
@@ -111,9 +111,19 @@ public class Home extends javax.swing.JFrame {
         jMenu2.setText("Fornecedor");
 
         miCriarFormecedor.setText("Criar");
+        miCriarFormecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCriarFormecedorActionPerformed(evt);
+            }
+        });
         jMenu2.add(miCriarFormecedor);
 
         miListarFornecedor.setText("Listar");
+        miListarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarFornecedorActionPerformed(evt);
+            }
+        });
         jMenu2.add(miListarFornecedor);
 
         jMenuBar1.add(jMenu2);
@@ -124,12 +134,7 @@ public class Home extends javax.swing.JFrame {
         miCriarVenda.setText("Realizar");
         miCriarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarVendaActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarVendaActionPerformed(evt);
             }
         });
         jMenu3.add(miCriarVenda);
@@ -143,6 +148,11 @@ public class Home extends javax.swing.JFrame {
         jMenu4.setText("Compras");
 
         miCriarCompra.setText("Realizar");
+        miCriarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCriarCompraActionPerformed(evt);
+            }
+        });
         jMenu4.add(miCriarCompra);
 
         miListarCompra.setText("Listar");
@@ -192,6 +202,26 @@ public class Home extends javax.swing.JFrame {
         ProdutoBL.criarCerveja(this);
     }//GEN-LAST:event_miCriarProdutoActionPerformed
 
+    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miCriarCompraActionPerformed
+
+    private void miListarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miListarFornecedorActionPerformed
+
+    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarFormecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miCriarFormecedorActionPerformed
+
+    private void miListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miListarEstoqueActionPerformed
+
+    private void miListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miListarProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -235,7 +265,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem miCriarCliente;
     private javax.swing.JMenuItem miCriarCompra;
     private javax.swing.JMenuItem miCriarFormecedor;
@@ -243,6 +272,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem miCriarVenda;
     private javax.swing.JMenuItem miListarCliente;
     private javax.swing.JMenuItem miListarCompra;
+    private javax.swing.JMenuItem miListarEstoque;
     private javax.swing.JMenuItem miListarFornecedor;
     private javax.swing.JMenuItem miListarProduto;
     private javax.swing.JMenuItem miListarVenda;
