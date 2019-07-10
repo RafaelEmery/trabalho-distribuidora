@@ -30,6 +30,9 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ltTransacoes = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         miCriarCliente = new javax.swing.JMenuItem();
@@ -51,6 +54,16 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Distribuidora Cana");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        ltTransacoes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(ltTransacoes);
+
+        jLabel1.setText("Transações");
 
         jMenuBar1.setBackground(new java.awt.Color(160, 158, 149));
 
@@ -59,12 +72,7 @@ public class Home extends javax.swing.JFrame {
         miCriarCliente.setText("Criar");
         miCriarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarClienteActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarClienteActionPerformed(evt);
             }
         });
         jMenu5.add(miCriarCliente);
@@ -87,12 +95,7 @@ public class Home extends javax.swing.JFrame {
         miCriarProduto.setText("Criar");
         miCriarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarProdutoActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarProdutoActionPerformed(evt);
             }
         });
         jMenu6.add(miCriarProduto);
@@ -123,12 +126,7 @@ public class Home extends javax.swing.JFrame {
         miCriarFormecedor.setText("Criar");
         miCriarFormecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarFormecedorActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarFormecedorActionPerformed(evt);
             }
         });
         jMenu2.add(miCriarFormecedor);
@@ -149,17 +147,17 @@ public class Home extends javax.swing.JFrame {
         miCriarVenda.setText("Realizar");
         miCriarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarVendaActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarVendaActionPerformed(evt);
             }
         });
         jMenu3.add(miCriarVenda);
 
         miListarVenda.setText("Listar");
+        miListarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarVendaActionPerformed(evt);
+            }
+        });
         jMenu3.add(miListarVenda);
 
         jMenuBar1.add(jMenu3);
@@ -170,12 +168,7 @@ public class Home extends javax.swing.JFrame {
         miCriarCompra.setText("Realizar");
         miCriarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					miCriarCompraActionPerformed(evt);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                miCriarCompraActionPerformed(evt);
             }
         });
         jMenu4.add(miCriarCompra);
@@ -196,19 +189,36 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarVendaActionPerformed
-        TransacaoVendaBL.criarTransacao(this);
+    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarVendaActionPerformed
+        try {
+			TransacaoVendaBL.criarTransacao(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }//GEN-LAST:event_miCriarVendaActionPerformed
 
     private void miListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarClienteActionPerformed
@@ -219,33 +229,82 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_miListarCompraActionPerformed
 
-    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarClienteActionPerformed
-        ClienteBL.criar(this);
+    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarClienteActionPerformed
+        try{
+            ClienteBL.criar(this);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miCriarClienteActionPerformed
 
-    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarProdutoActionPerformed
-        ProdutoBL.criarCerveja(this);
+    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarProdutoActionPerformed
+        try{
+            ProdutoBL.criarCerveja(this);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miCriarProdutoActionPerformed
 
-    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarCompraActionPerformed
-    	TransacaoCompraBL.criarTransacao(this);
+    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarCompraActionPerformed
+        try{   
+            TransacaoCompraBL.criarTransacao(this);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miCriarCompraActionPerformed
 
     private void miListarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarFornecedorActionPerformed
-    	FornecedorBL.listar();
+    	try{
+            FornecedorBL.listar();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miListarFornecedorActionPerformed
 
-    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarFormecedorActionPerformed
-        FornecedorBL.criar(this);
+    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarFormecedorActionPerformed
+        try{
+            FornecedorBL.criar(this);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miCriarFormecedorActionPerformed
 
     private void miListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarEstoqueActionPerformed
-        EstoqueBL.listar(this);
+
+        try{
+            EstoqueBL.listar(this);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miListarEstoqueActionPerformed
 
     private void miListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarProdutoActionPerformed
-        ProdutoBL.listarCerveja();
+        try{
+            ProdutoBL.listarCerveja();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
     }//GEN-LAST:event_miListarProdutoActionPerformed
+
+    private void miListarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miListarVendaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{
+            //this.ltTransacoes.setListData(Transacao.);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -283,6 +342,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -290,6 +350,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList ltTransacoes;
     private javax.swing.JMenuItem miCriarCliente;
     private javax.swing.JMenuItem miCriarCompra;
     private javax.swing.JMenuItem miCriarFormecedor;
