@@ -100,7 +100,12 @@ public class Listar extends javax.swing.JFrame {
     private void ltItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ltItemMouseClicked
         if (evt.getClickCount() == 2) {
             Cerveja cerveja = (Cerveja)((JList)evt.getSource()).getSelectedValue();
-            Detalhes.showInputsDialog(this, cerveja, "Alterar Cerveja");
+            try {
+                cerveja.update(Detalhes.showInputsDialog(this, cerveja, "Alterar Cerveja"));
+                this.ltItem.setListData(Cerveja.all().toArray());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+            }
         }
     }//GEN-LAST:event_ltItemMouseClicked
 

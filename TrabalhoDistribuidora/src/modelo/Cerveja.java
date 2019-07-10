@@ -131,7 +131,8 @@ public class Cerveja extends Produto {
 	
 	public Cerveja update(String[] valores) throws SQLException, Exception {
 		ResultSet rs = Cerveja.getConnection().update(Cerveja.getTableName(), Cerveja.fillable, Cerveja.createLinkedList(valores), this.id);
-		return Cerveja.createFromDatabase(rs);
+		rs.next();
+                return Cerveja.createFromDatabase(rs);
 	}
 
 	@Override
