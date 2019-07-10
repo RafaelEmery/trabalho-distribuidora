@@ -35,7 +35,7 @@ public class MySql {
 				"  `tipoPessoa` int(11) NOT NULL,\n" + 
 				"  `telefone` varchar(45) CHARACTER SET utf8 NOT NULL,\n" + 
 				"  PRIMARY KEY (`id`)\n" + 
-				") ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;\n" + 
+				") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n" + 
 				"";
 		String fornecedor = "CREATE TABLE IF NOT EXISTS `fornecedor` (\n" + 
 				"  `id` int(11) NOT NULL AUTO_INCREMENT,\n" + 

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class ItemDeEstoque extends Modelo {
     private static String tableName = "estoque";
-    private static String[] fillable = { "quantidade", "idProduto" };
+    private static String[] fillable = { "quant", "idProduto" };
     private static String[] labels = { "Quantidade", "Núm. Produto" };
     
     private int id;
@@ -94,7 +94,7 @@ public class ItemDeEstoque extends Modelo {
      */
     public static ItemDeEstoque createFromDatabase(ResultSet rs) throws Exception {
         int id = rs.getInt("id");
-        int quantidade = rs.getInt("quantidade");
+        int quantidade = rs.getInt("quant");
         int idProduto = rs.getInt("idProduto");
         Cerveja cerveja = Cerveja.find(idProduto);
         ItemDeEstoque newItem = new ItemDeEstoque(quantidade, cerveja);
@@ -103,11 +103,15 @@ public class ItemDeEstoque extends Modelo {
     }
     
     public static ItemDeEstoque create(String[] valores) throws Exception {
-        return ItemDeEstoque.createFromDatabase(ItemDeEstoque.getConnection().create(Cliente.getTableName(), ItemDeEstoque.fillable, ItemDeEstoque.createLinkedList(valores)));
+    	ResultSet rs = ItemDeEstoque.getConnection().create(ItemDeEstoque.getTableName(), ItemDeEstoque.fillable, ItemDeEstoque.createLinkedList(valores));
+        rs.next();
+    	return ItemDeEstoque.createFromDatabase(rs);
     }
 
     public ItemDeEstoque update(String[] valores) throws SQLException, Exception {
-        return ItemDeEstoque.createFromDatabase(ItemDeEstoque.getConnection().update(ItemDeEstoque.getTableName(), this.fillable, ItemDeEstoque.createLinkedList(valores), this.id));
+    	ResultSet rs = ItemDeEstoque.getConnection().update(ItemDeEstoque.getTableName(), ItemDeEstoque.fillable, ItemDeEstoque.createLinkedList(valores), this.id);
+        rs.next();
+    	return ItemDeEstoque.createFromDatabase(rs);
     }
     
     public void incrementaEstoque(int quantidade) throws Exception{

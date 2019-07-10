@@ -5,7 +5,12 @@
  */
 package gui.fornecedor;
 
+import gui.Detalhes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import modelo.Fornecedor;
+import modelo.MySql;
 /**
  *
  * @author joao
@@ -33,7 +38,13 @@ public class Listar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ltItem = new javax.swing.JList();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Listar Clientes");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnInfo.setText("info");
         btnInfo.setToolTipText("Clique duas vezes para ver os detalhes");
@@ -45,6 +56,7 @@ public class Listar extends javax.swing.JFrame {
 
         lbListagem.setText("Itens");
 
+        ltItem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ltItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ltItemMouseClicked(evt);
@@ -79,6 +91,7 @@ public class Listar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
@@ -88,8 +101,24 @@ public class Listar extends javax.swing.JFrame {
     private void ltItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ltItemMouseClicked
         if (evt.getClickCount() == 2) {
             
+            Fornecedor fornecedor = (Fornecedor)((JList)evt.getSource()).getSelectedValue();
+            try {
+                fornecedor.update(Detalhes.showInputsDialog(this, fornecedor, "Alterar Fornecedor"));
+                this.ltItem.setListData(Fornecedor.all().toArray());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
+            }
         }
     }//GEN-LAST:event_ltItemMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{
+            this.ltItem.setListData(Fornecedor.all().toArray());
+        }
+        catch(Exception e){
+            this.ltItem.setListData(new Object[0]);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -116,6 +145,7 @@ public class Listar extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Listar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

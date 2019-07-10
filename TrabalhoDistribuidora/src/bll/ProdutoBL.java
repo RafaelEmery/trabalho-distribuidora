@@ -10,6 +10,7 @@ import gui.produto.Listar;
 
 import java.awt.Component;
 import modelo.Cerveja;
+import modelo.ItemDeEstoque;
 
 /**
  *
@@ -18,7 +19,9 @@ import modelo.Cerveja;
 public class ProdutoBL {
     public static void criarCerveja(Component parent) throws Exception{
         Cerveja cerveja = new Cerveja();
-        Cerveja.create(Detalhes.showInputsDialog(parent, cerveja, "Criar Cerveja"));
+        cerveja = Cerveja.create(Detalhes.showInputsDialog(parent, cerveja, "Criar Cerveja"));
+        ItemDeEstoque item = new ItemDeEstoque(0, cerveja);
+        ItemDeEstoque.create(item.getValues());
     }
     
     public static void listarCerveja(){

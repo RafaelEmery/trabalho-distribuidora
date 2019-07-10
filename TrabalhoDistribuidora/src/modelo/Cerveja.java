@@ -120,7 +120,9 @@ public class Cerveja extends Produto {
 	}
 	
 	public static Cerveja create(String[] valores) throws Exception {
-		return Cerveja.createFromDatabase(Cerveja.getConnection().create(Cerveja.getTableName(), Cerveja.fillable, Cerveja.createLinkedList(valores)));
+		ResultSet rs = Cerveja.getConnection().create(Cerveja.getTableName(), Cerveja.fillable, Cerveja.createLinkedList(valores));
+		rs.next();
+		return Cerveja.createFromDatabase(rs);
 	}
 	
 	public void delete() throws SQLException {
@@ -128,7 +130,8 @@ public class Cerveja extends Produto {
 	}
 	
 	public Cerveja update(String[] valores) throws SQLException, Exception {
-		return Cerveja.createFromDatabase(Cerveja.getConnection().update(Cerveja.getTableName(), this.fillable, Cerveja.createLinkedList(valores), this.id));
+		ResultSet rs = Cerveja.getConnection().update(Cerveja.getTableName(), Cerveja.fillable, Cerveja.createLinkedList(valores), this.id);
+		return Cerveja.createFromDatabase(rs);
 	}
 
 	@Override

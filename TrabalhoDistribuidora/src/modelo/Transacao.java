@@ -162,10 +162,18 @@ public abstract class Transacao extends Modelo {
 	}
 	
 	public static Transacao create(String[] valores) throws Exception {
-		if(Integer.parseInt(valores[2]) > 0) {
+		if(Double.parseDouble(valores[3]) < 0) {
 			//Corrigi estoque com Transacao Venda
+			ItemDeEstoque item = ItemDeEstoque.find(Integer.parseInt(valores[0]));
+			item.incrementaEstoque(Integer.parseInt(valores[2]));
+			item.update(item.getValues());
+			
 		} else {
 			//Corrige estoque com Transacao Compra
+			ItemDeEstoque item = ItemDeEstoque.find(Integer.parseInt(valores[0]));
+			if(item.decrementaEstoque(Integer.parseInt(valores[2]))) {
+				item.update(item.getValues());
+			}
 		}
 		return Transacao.createFromDatabase(Transacao.getConnection().create(Transacao.getTableName(), Transacao.fillable, Transacao.createLinkedList(valores)));
 	}
