@@ -61,7 +61,6 @@ public class ItemDeEstoque extends Modelo {
     
     /**
      * Pega todos os registros da tabela da classe e retorna eles em uma linked list de objetos pessoa
-     * @param db - banco de dados que esta sendo utilizado
      * @return LinkedList<ItemDeEstoque>
      * @author Cassio Fernandes
      * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
@@ -127,5 +126,15 @@ public class ItemDeEstoque extends Modelo {
         else {
             return false;
         }
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder string = new StringBuilder();
+        string.append("Nome Produto: ");
+        string.append(((Cerveja)this.getProduto()).getNome());
+        string.append("/n Quantidade: ");
+        string.append(this.getQuantidade());
+        return string.toString();
     }
 }
