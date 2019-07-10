@@ -9,9 +9,9 @@ public abstract class Produto extends Modelo {
 	private String codigoDeBarra;
 	
 //	//Metodos construtores
-//	public Produto() throws Exception {
-//		throw new Exception("Produto invalido");
-//	}
+	public Produto() {
+            
+	}
 	
 	public Produto(double valor, String codigoDeBarra) throws Exception {
 		this.setValor(valor);

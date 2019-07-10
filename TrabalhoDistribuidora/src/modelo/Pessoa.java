@@ -8,9 +8,10 @@ public abstract class Pessoa extends Modelo{
 
 	
 	//Metodos construtores
-	public Pessoa() throws Exception {
-		throw new Exception("Pessoa invalida.");
+	public Pessoa() {
+            
 	}
+        
 	public Pessoa(String nome, String cadastro, String telefone, int tipoPessoa) throws Exception {
 		this.setNome(nome);
 		this.setCadastro(cadastro);

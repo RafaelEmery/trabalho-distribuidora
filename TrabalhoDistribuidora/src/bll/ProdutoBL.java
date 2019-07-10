@@ -5,10 +5,21 @@
  */
 package bll;
 
+import gui.Detalhes;
+import java.awt.Component;
+import modelo.Cerveja;
+
 /**
  *
  * @author joao
  */
 public class ProdutoBL {
+    public static void criarCerveja(Component parent){
+        Cerveja cerveja = new Cerveja();
+        Detalhes.showInputsDialog(parent, cerveja, "Criar Cerveja");
+    }
     
+    public static void listarCerveja(){
+        
+    }
 }
