@@ -59,7 +59,12 @@ public class Home extends javax.swing.JFrame {
         miCriarCliente.setText("Criar");
         miCriarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarClienteActionPerformed(evt);
+                try {
+					miCriarClienteActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu5.add(miCriarCliente);
@@ -82,7 +87,12 @@ public class Home extends javax.swing.JFrame {
         miCriarProduto.setText("Criar");
         miCriarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarProdutoActionPerformed(evt);
+                try {
+					miCriarProdutoActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu6.add(miCriarProduto);
@@ -114,7 +124,12 @@ public class Home extends javax.swing.JFrame {
         miCriarVenda.setText("Realizar");
         miCriarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarVendaActionPerformed(evt);
+                try {
+					miCriarVendaActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu3.add(miCriarVenda);
@@ -157,8 +172,8 @@ public class Home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarVendaActionPerformed
-        // TODO add your handling code here:
+    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarVendaActionPerformed
+        TransacaoVendaBL.criarTransacao(this);
     }//GEN-LAST:event_miCriarVendaActionPerformed
 
     private void miListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarClienteActionPerformed
@@ -169,11 +184,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_miListarCompraActionPerformed
 
-    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarClienteActionPerformed
+    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarClienteActionPerformed
         ClienteBL.criar(this);
     }//GEN-LAST:event_miCriarClienteActionPerformed
 
-    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarProdutoActionPerformed
+    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarProdutoActionPerformed
         ProdutoBL.criarCerveja(this);
     }//GEN-LAST:event_miCriarProdutoActionPerformed
 

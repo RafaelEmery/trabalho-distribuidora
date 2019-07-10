@@ -6,6 +6,8 @@
 package bll;
 
 import gui.Detalhes;
+import gui.produto.Listar;
+
 import java.awt.Component;
 import modelo.Cerveja;
 
@@ -14,12 +16,13 @@ import modelo.Cerveja;
  * @author joao
  */
 public class ProdutoBL {
-    public static void criarCerveja(Component parent){
+    public static void criarCerveja(Component parent) throws Exception{
         Cerveja cerveja = new Cerveja();
-        Detalhes.showInputsDialog(parent, cerveja, "Criar Cerveja");
+        Cerveja.create(Detalhes.showInputsDialog(parent, cerveja, "Criar Cerveja"));
     }
     
     public static void listarCerveja(){
-        
+        Listar form = new Listar();
+        form.setVisible(true);
     }
 }

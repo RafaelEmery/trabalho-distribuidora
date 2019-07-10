@@ -46,6 +46,7 @@ public class Cliente extends Pessoa {
      */
     public static Cliente find(int id) throws Exception {
             ResultSet rs = Cliente.getConnection().select(Cliente.getTableName()).where("id", "=", id + "").get();
+            rs.next();
             return Cliente.createFromDatabase(rs);
     }
 
@@ -56,7 +57,7 @@ public class Cliente extends Pessoa {
      * @throws Exception
      */
     public static Cliente createFromDatabase(ResultSet rs) throws Exception {
-        rs.next();
+//        rs.next();
         int id = rs.getInt("id");
         String nome = rs.getString("nome");
         int tipoPessoa = rs.getInt("tipoPessoa");

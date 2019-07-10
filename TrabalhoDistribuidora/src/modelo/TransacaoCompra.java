@@ -46,14 +46,7 @@ public class TransacaoCompra extends Transacao {
 	public void atualizaCaixa(int quantidade, double valor) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public double calculaValor(int quantidade, double valorUnitario) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+	}	
 
 
 }

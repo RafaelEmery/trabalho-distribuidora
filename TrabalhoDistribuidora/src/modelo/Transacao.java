@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public abstract class Transacao extends Modelo {
 	private static String tableName = "transacao";
 	private static String[] fillable = {"idProduto", "idResponsavel","quant", "valor", "desconto"};
-	private static String[] labels = {"Produto", "Responsavel","Quantidade", "Valor", "Desconto"};
+	private static String[] labels = {"Produto", "Responsavel","Quantidade","Valor", "Desconto"};
 	private int id;
 	
 	private int quantidade;
@@ -17,8 +17,11 @@ public abstract class Transacao extends Modelo {
 	
 	
 	//Metodos construtores
-	public Transacao() throws Exception {
-		throw new Exception("Transacao invalida");
+	public Transacao(){
+		this.quantidade = 0;
+		this.valor = 0;
+		this.produto = new Cerveja();
+		this.responsavel = 0;
 	}
 	
 	public Transacao(Cerveja produto, int responsavel,int quantidade, double valor, double desconto) throws Exception {
@@ -41,7 +44,7 @@ public abstract class Transacao extends Modelo {
 	
 	public void setValor(double valorUnitario) throws Exception {
 		if (valorUnitario > 0) {
-			this.valor = valorUnitario;
+			this.valor = valorUnitario * this.quantidade;
 		}
 		else {
 			throw new Exception("Valor unitario invalido");
@@ -98,7 +101,9 @@ public abstract class Transacao extends Modelo {
 	public abstract void atualizaCaixa(int quantidade, double valor);
 	
 	//Metodo que calcula o valor da transacao
-	public abstract double calculaValor(int quantidade, double valorUnitario);
+	public double calculaValor(int quantidade, double valorUnitario) {
+		return quantidade * valorUnitario;
+	}
 	
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -150,7 +155,7 @@ public abstract class Transacao extends Modelo {
 	}
 	
 	public static Transacao create(String[] valores) throws Exception {
-		if(Integer.parseInt(valores[3]) > 0) {
+		if(Integer.parseInt(valores[2]) > 0) {
 			//Corrigi estoque com Transacao Venda
 		} else {
 			//Corrige estoque com Transacao Compra
@@ -171,6 +176,10 @@ public abstract class Transacao extends Modelo {
 	public String[] getLabels() {
 		return labels;
 	}
+	
+	public Transacao update(String[] valores) throws SQLException, Exception {
+        return Transacao.createFromDatabase(Transacao.getConnection().update(Transacao.getTableName(), Transacao.fillable, Transacao.createLinkedList(valores), this.id));
+    }
 
 	@Override
 	public String[] getValues() {

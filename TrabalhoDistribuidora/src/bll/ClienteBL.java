@@ -15,9 +15,9 @@ import java.awt.Component;
  * @author joao
  */
 public class ClienteBL {
-    public static void criar(Component parent){
+    public static void criar(Component parent) throws Exception{
         Cliente cliente = new Cliente();
-        Detalhes.showInputsDialog(parent, cliente, "Criar Cliente");
+        Cliente.create(Detalhes.showInputsDialog(parent, cliente, "Criar Cliente"));
     }
     
     public static void listar(){

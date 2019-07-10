@@ -4,7 +4,7 @@ public class TransacaoVenda extends Transacao{
 	private Cliente cliente;
 	
 	//Metodos construtores
-	public TransacaoVenda() throws Exception {
+	public TransacaoVenda(){
 		super();
 	}
 	
@@ -24,8 +24,8 @@ public class TransacaoVenda extends Transacao{
 	}
 	
 	/**
-	 * Método equals genérico que confere se os objetos são da mesma classe, caso sejam, chama um método específico
-	 * para TransacaoVenda, caso não sejam o mesmo, retorna false. 
+	 * Mï¿½todo equals genï¿½rico que confere se os objetos sï¿½o da mesma classe, caso sejam, chama um mï¿½todo especï¿½fico
+	 * para TransacaoVenda, caso nï¿½o sejam o mesmo, retorna false. 
 	 * @return boolean
 	 * @author Cassio Fernandes
 	 */
@@ -39,7 +39,7 @@ public class TransacaoVenda extends Transacao{
 	}
 	
 	/**
-	 * Método equals específico para a classe TransacaoVenda, retorna true caso seus attributos sejam iguais.
+	 * Mï¿½todo equals especï¿½fico para a classe TransacaoVenda, retorna true caso seus attributos sejam iguais.
 	 * @return boolean
 	 * @author Cassio Fernandes
 	 * 
@@ -63,11 +63,6 @@ public class TransacaoVenda extends Transacao{
 	//Metodo para atualizar o caixa
 	public void atualizaCaixa(int quantidade, double valor) {
 		
-	}
-	
-	//Metodo para calcular o valor
-	public double calculaValor(int quantidade, double valorUnitario) {
-		return quantidade * valorUnitario;
 	}
 	
 	//Metodo para aplicar desconto

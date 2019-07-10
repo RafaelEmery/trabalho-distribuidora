@@ -8,7 +8,7 @@ public class Cerveja extends Produto {
 	
 	private static String tableName = "produto";
 	private static String[] fillable = {"nome", "porcentagemAlcool","tipoCerveja", "valor", "codigoBarra"};
-	private static String[] labels = {"Nome", "Porcentagem de Álcool","Tipo de Cerveja", "Valor", "Codigo de Barra"};
+	private static String[] labels = {"Nome", "Porcentagem de ï¿½lcool","Tipo de Cerveja", "Valor", "Codigo de Barra"};
 	private int id;
 	
 	private String nome;
@@ -93,6 +93,7 @@ public class Cerveja extends Produto {
 	 */
 	public static Cerveja find(int id) throws Exception {
 		ResultSet rs = Cerveja.getConnection().select(Produto.getTableName()).where("id", "=", id + "").get();
+		rs.next();
 		return Cerveja.createFromDatabase(rs);
 	}
 	
@@ -103,7 +104,7 @@ public class Cerveja extends Produto {
 	 * @throws Exception
 	 */
 	public static Cerveja createFromDatabase(ResultSet rs) throws Exception {
-		rs.next();
+//		rs.next();
 		int id = rs.getInt("id");
         String nome = rs.getString("nome");
         double porcentagemAlcool = rs.getDouble("porcentagemAlcool");
