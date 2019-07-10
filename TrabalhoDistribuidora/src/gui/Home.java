@@ -212,8 +212,13 @@ public class Home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarVendaActionPerformed
-        TransacaoVendaBL.criarTransacao(this);
+    private void miCriarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarVendaActionPerformed
+        try {
+			TransacaoVendaBL.criarTransacao(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }//GEN-LAST:event_miCriarVendaActionPerformed
 
     private void miListarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarClienteActionPerformed
@@ -224,7 +229,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_miListarCompraActionPerformed
 
-    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarClienteActionPerformed
+    private void miCriarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarClienteActionPerformed
         try{
             ClienteBL.criar(this);
         }
@@ -233,7 +238,7 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miCriarClienteActionPerformed
 
-    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarProdutoActionPerformed
+    private void miCriarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarProdutoActionPerformed
         try{
             ProdutoBL.criarCerveja(this);
         }
@@ -242,7 +247,7 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miCriarProdutoActionPerformed
 
-    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarCompraActionPerformed
+    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarCompraActionPerformed
         try{   
             TransacaoCompraBL.criarTransacao(this);
         }
@@ -260,7 +265,7 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miListarFornecedorActionPerformed
 
-    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarFormecedorActionPerformed
+    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarFormecedorActionPerformed
         try{
             FornecedorBL.criar(this);
         }
@@ -270,6 +275,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_miCriarFormecedorActionPerformed
 
     private void miListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarEstoqueActionPerformed
+
         try{
             EstoqueBL.listar(this);
         }

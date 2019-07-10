@@ -4,7 +4,5 @@ TrabalhoDistribuidora/bin/gui/Home$1.class
 TrabalhoDistribuidora/bin/gui/Home$2.class
 TrabalhoDistribuidora/bin/gui/Home.class
 TrabalhoDistribuidora/bin/gui/Home.form
-/.gitignore
-/bll/
 /gui/
-/modelo/
+/bll/

@@ -5,7 +5,7 @@
  */
 package bll;
 
-import gui.fornecedor.*;
+import gui.estoque.*;
 import java.awt.Component;
 
 /**
