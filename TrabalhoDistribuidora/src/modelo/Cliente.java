@@ -30,9 +30,9 @@ public class Cliente extends Pessoa {
 	 * @author Cassio Fernandes
 	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
 	 */
-	public static LinkedList<Pessoa> all(MySql db) throws Exception{
+	public static LinkedList<Pessoa> all() throws Exception{
 		LinkedList<Pessoa> lista = new LinkedList<Pessoa>();
-		ResultSet rs = db.select(Cliente.getTableName()).get();
+		ResultSet rs = Cliente.getConnection().select(Cliente.getTableName()).get();
 		while(rs.next()) {
 			lista.add(Cliente.createFromDatabase(rs));
 		}
@@ -44,8 +44,8 @@ public class Cliente extends Pessoa {
 	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
 	 * @author Cassio Fernandes
 	 */
-	public static Cliente find(MySql db, int id) throws Exception {
-		ResultSet rs = db.select(Cliente.getTableName()).where("id", "=", id + "").get();
+	public static Cliente find(int id) throws Exception {
+		ResultSet rs = Cliente.getConnection().select(Cliente.getTableName()).where("id", "=", id + "").get();
 		return Cliente.createFromDatabase(rs);
 	}
 	
@@ -68,32 +68,31 @@ public class Cliente extends Pessoa {
 		return newCliente;
 	}
 	
-	public static Cliente create(MySql db, String[] valores) throws Exception {
-		return Cliente.createFromDatabase(db.create(Cliente.getTableName(), Cliente.fillable, Cliente.createLinkedList(valores)));
+	public static Cliente create(String[] valores) throws Exception {
+		return Cliente.createFromDatabase(Cliente.getConnection().create(Cliente.getTableName(), Cliente.fillable, Cliente.createLinkedList(valores)));
 	}
 	
-	public void delete(MySql db) throws SQLException {
-		db.delete(Cliente.getTableName()).where("id", "=", this.id + "").executar();
+	public void delete() throws SQLException {
+		Cliente.getConnection().delete(Cliente.getTableName()).where("id", "=", this.id + "").executar();
 	}
 	
-	public Cliente update(MySql db, String[] valores) throws SQLException, Exception {
-		return Cliente.createFromDatabase(db.update(Cliente.getTableName(), this.fillable, Cliente.createLinkedList(valores), this.id));
+	public Cliente update(String[] valores) throws SQLException, Exception {
+		return Cliente.createFromDatabase(Cliente.getConnection().update(Cliente.getTableName(), this.fillable, Cliente.createLinkedList(valores), this.id));
 	}
 
 	@Override
-	String[] getFillable() {
+	public String[] getFillable() {
 		return Cliente.fillable;
 	}
 
 	@Override
-	String[] getLabels() {
+	public String[] getLabels() {
 		return labels;
 	}
 
 	@Override
-	String[] getValues() {
+	public String[] getValues() {
 		String[] values = {this.getNome(), this.getCadastro(), this.getTipoPessoa() + "", this.getTelefone()};
 		return values;
 	}
-	
 }

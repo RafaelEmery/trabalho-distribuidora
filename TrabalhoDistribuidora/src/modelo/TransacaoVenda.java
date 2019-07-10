@@ -2,39 +2,25 @@ package modelo;
 
 public class TransacaoVenda extends Transacao{
 	private Cliente cliente;
-	private double desconto;
 	
 	//Metodos construtores
 	public TransacaoVenda() throws Exception {
 		super();
 	}
 	
-	public TransacaoVenda(int quantidade, double valorUnitario, String produto, Cliente cliente, double desconto) throws Exception {
-		super(quantidade, valorUnitario, produto);
-		this.setCliente(cliente);
-		this.setDesconto(desconto);
+	public TransacaoVenda(Cerveja produto, int responsavel, int quant, double valor, double desconto) throws Exception {
+		super(produto, responsavel, quant, valor, desconto);
+		this.setCliente(Cliente.find(this.getResponsavel()));
 	}
 	
 	//Metodos set
 	public void setCliente(Cliente cliente) throws Exception {
 		this.cliente = cliente;
 	}
-
-	public void setDesconto(double desconto) throws Exception {
-		if (desconto > 0) {
-			this.desconto = desconto;
-		}
-		else {
-			throw new Exception("Desconto invalido");
-		}
-	}
 	
 	//Metodos get
 	public Cliente getCliente() {
 		return cliente;
-	}
-	public double getDesconto() {
-		return desconto;
 	}
 	
 	/**

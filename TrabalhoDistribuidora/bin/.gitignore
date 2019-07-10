@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 TrabalhoDistribuidora/bin/bll/ProdutoBL.class
 TrabalhoDistribuidora/bin/bll/TransacaoBL.class
 TrabalhoDistribuidora/bin/gui/Home$1.class
@@ -8,3 +9,7 @@ TrabalhoDistribuidora/bin/gui/Home.form
 /bll/
 /gui/
 /modelo/
+=======
+
+/gui/
+>>>>>>> 1eeb8371b36681c4dcc4f4c2386896a739619d31

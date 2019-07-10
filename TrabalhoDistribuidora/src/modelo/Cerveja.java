@@ -5,7 +5,12 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class Cerveja extends Produto {
+	
+	private static String tableName = "produto";
+	private static String[] fillable = {"nome", "porcentagemAlcool","tipoCerveja", "valor", "codigoBarra"};
+	private static String[] labels = {"Nome", "Porcentagem de Álcool","Tipo de Cerveja", "Valor", "Codigo de Barra"};
 	private int id;
+	
 	private String nome;
 	private String tipoCerveja;
 	private double porcentagemAlcool;
@@ -72,9 +77,9 @@ public class Cerveja extends Produto {
 	 * @author Cassio Fernandes
 	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
 	 */
-	public static LinkedList<Produto> all(MySql db) throws Exception{
+	public static LinkedList<Produto> all() throws Exception{
 		LinkedList<Produto> lista = new LinkedList<Produto>();
-		ResultSet rs = db.select(Produto.getTableName()).get();
+		ResultSet rs = Cerveja.getConnection().select(Produto.getTableName()).get();
 		while(rs.next()) {
 			lista.add(Cerveja.createFromDatabase(rs));
 		}
@@ -86,8 +91,8 @@ public class Cerveja extends Produto {
 	 * @throws Exception - Caso nao seja possivel criar um objeto Cerveja a partir dos dados do banco de dados
 	 * @author Cassio Fernandes
 	 */
-	public static Cerveja find(MySql db, int id) throws Exception {
-		ResultSet rs = db.select(Produto.getTableName()).where("id", "=", id + "").get();
+	public static Cerveja find(int id) throws Exception {
+		ResultSet rs = Cerveja.getConnection().select(Produto.getTableName()).where("id", "=", id + "").get();
 		return Cerveja.createFromDatabase(rs);
 	}
 	
@@ -109,6 +114,38 @@ public class Cerveja extends Produto {
 		newCerveja = new Cerveja(nome, tipo, porcentagemAlcool, valor, codigoBarra);
 		newCerveja.id = id;
 		return newCerveja;
+	}
+	
+	public static Cerveja create(String[] valores) throws Exception {
+		return Cerveja.createFromDatabase(Cerveja.getConnection().create(Cerveja.getTableName(), Cerveja.fillable, Cerveja.createLinkedList(valores)));
+	}
+	
+	public void delete() throws SQLException {
+		Cerveja.getConnection().delete(Cerveja.getTableName()).where("id", "=", this.id + "").executar();
+	}
+	
+	public Cerveja update(String[] valores) throws SQLException, Exception {
+		return Cerveja.createFromDatabase(Cerveja.getConnection().update(Cerveja.getTableName(), this.fillable, Cerveja.createLinkedList(valores), this.id));
+	}
+
+	@Override
+	public String[] getFillable() {
+		return Cerveja.fillable;
+	}
+
+	@Override
+	public String[] getLabels() {
+		return labels;
+	}
+
+	@Override
+	public String[] getValues() {
+		String[] values = {this.getNome(), this.getPorcentagemAlcool() + "", this.getTipoCerveja() + "", this.getValor() + "", this.getCodigoDeBarra()};
+		return values;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 }

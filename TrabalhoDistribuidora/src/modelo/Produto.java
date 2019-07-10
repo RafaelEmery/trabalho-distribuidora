@@ -3,7 +3,7 @@ package modelo;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-public abstract class Produto {
+public abstract class Produto extends Modelo {
 	private static String tableName = "produto";
 	private double valor;
 	private String codigoDeBarra;
