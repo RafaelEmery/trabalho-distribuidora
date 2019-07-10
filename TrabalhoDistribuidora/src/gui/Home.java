@@ -59,7 +59,12 @@ public class Home extends javax.swing.JFrame {
         miCriarCliente.setText("Criar");
         miCriarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarClienteActionPerformed(evt);
+                try {
+					miCriarClienteActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu5.add(miCriarCliente);
@@ -82,7 +87,12 @@ public class Home extends javax.swing.JFrame {
         miCriarProduto.setText("Criar");
         miCriarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarProdutoActionPerformed(evt);
+                try {
+					miCriarProdutoActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu6.add(miCriarProduto);
@@ -113,7 +123,12 @@ public class Home extends javax.swing.JFrame {
         miCriarFormecedor.setText("Criar");
         miCriarFormecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarFormecedorActionPerformed(evt);
+                try {
+					miCriarFormecedorActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu2.add(miCriarFormecedor);
@@ -134,7 +149,12 @@ public class Home extends javax.swing.JFrame {
         miCriarVenda.setText("Realizar");
         miCriarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarVendaActionPerformed(evt);
+                try {
+					miCriarVendaActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu3.add(miCriarVenda);
@@ -150,7 +170,12 @@ public class Home extends javax.swing.JFrame {
         miCriarCompra.setText("Realizar");
         miCriarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCriarCompraActionPerformed(evt);
+                try {
+					miCriarCompraActionPerformed(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
         jMenu4.add(miCriarCompra);
@@ -202,16 +227,16 @@ public class Home extends javax.swing.JFrame {
         ProdutoBL.criarCerveja(this);
     }//GEN-LAST:event_miCriarProdutoActionPerformed
 
-    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarCompraActionPerformed
-        // TODO add your handling code here:
+    private void miCriarCompraActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarCompraActionPerformed
+    	TransacaoCompraBL.criarTransacao(this);
     }//GEN-LAST:event_miCriarCompraActionPerformed
 
     private void miListarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarFornecedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_miListarFornecedorActionPerformed
 
-    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCriarFormecedorActionPerformed
-        // TODO add your handling code here:
+    private void miCriarFormecedorActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_miCriarFormecedorActionPerformed
+        FornecedorBL.criar(this);
     }//GEN-LAST:event_miCriarFormecedorActionPerformed
 
     private void miListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarEstoqueActionPerformed

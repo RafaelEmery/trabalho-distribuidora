@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public abstract class Transacao extends Modelo {
 	private static String tableName = "transacao";
 	private static String[] fillable = {"idProduto", "idResponsavel","quant", "valor", "desconto"};
-	private static String[] labels = {"Produto", "Responsavel","Quantidade","Valor", "Desconto"};
+	private static String[] labels = {"Produto", "Responsavel","Quantidade","Despesa/Receita (-1/1)", "Desconto"};
 	private int id;
 	
 	private int quantidade;
@@ -21,6 +21,13 @@ public abstract class Transacao extends Modelo {
 		this.quantidade = 0;
 		this.valor = 0;
 		this.produto = new Cerveja();
+		this.responsavel = 0;
+	}
+	
+	public Transacao(Cerveja cerveja, double valor){
+		this.quantidade = 0;
+		this.valor = valor;
+		this.produto = cerveja;
 		this.responsavel = 0;
 	}
 	
@@ -43,12 +50,12 @@ public abstract class Transacao extends Modelo {
 	}
 	
 	public void setValor(double valorUnitario) throws Exception {
-		if (valorUnitario > 0) {
+//		if (valorUnitario > 0) {
 			this.valor = valorUnitario * this.quantidade;
-		}
-		else {
-			throw new Exception("Valor unitario invalido");
-		}
+//		}
+//		else {
+//			throw new Exception("Valor unitario invalido");
+//		}
 	}
 	
 	public void setProduto(Cerveja produto) {

@@ -4,10 +4,8 @@ import gui.Detalhes;
 import javax.swing.*;
 
 import modelo.Cerveja;
-import modelo.Cliente;
-import modelo.MySql;
 import modelo.Transacao;
-import modelo.TransacaoVenda;
+import modelo.TransacaoCompra;
 /**
  *
  * @author joao
@@ -103,10 +101,9 @@ public class Listar extends javax.swing.JFrame {
     private void ltItemMouseClicked(java.awt.event.MouseEvent evt) throws Exception {//GEN-FIRST:event_ltItemMouseClicked
         if (evt.getClickCount() == 2) {
             Cerveja cerveja = (Cerveja)((JList)evt.getSource()).getSelectedValue();
-            Transacao transacao = new TransacaoVenda();
-            transacao.setProduto(cerveja);
-            transacao = TransacaoVenda.create(Detalhes.showInputsDialog(this, transacao, "Produto para transação de Venda"));
-            transacao.setValor(transacao.getProduto().getValor());
+            Transacao transacao = new TransacaoCompra(cerveja, -1);
+            transacao = TransacaoCompra.create(Detalhes.showInputsDialog(this, transacao, "Produto para transação de Compra"));
+            transacao.setValor(transacao.getProduto().getValor() * -1);
             transacao.update(transacao.getValues());
         }
     }//GEN-LAST:event_ltItemMouseClicked

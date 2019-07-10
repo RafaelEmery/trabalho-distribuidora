@@ -70,7 +70,9 @@ public class Cliente extends Pessoa {
     }
 
     public static Cliente create(String[] valores) throws Exception {
-        return Cliente.createFromDatabase(Cliente.getConnection().create(Cliente.getTableName(), Cliente.fillable, Cliente.createLinkedList(valores)));
+    	ResultSet rs = Cliente.getConnection().create(Cliente.getTableName(), Cliente.fillable, Cliente.createLinkedList(valores));
+        rs.next();
+    	return Cliente.createFromDatabase(rs);
     }
 
     public void delete() throws SQLException {
