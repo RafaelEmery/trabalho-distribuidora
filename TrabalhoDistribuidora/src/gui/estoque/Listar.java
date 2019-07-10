@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.cliente;
+package gui.estoque;
 
-import gui.Detalhes;
 import javax.swing.*;
-import modelo.Cliente;
-import modelo.MySql;
+import modelo.ItemDeEstoque;
 /**
  *
  * @author joao
@@ -36,8 +34,7 @@ public class Listar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ltItem = new javax.swing.JList();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Listar Clientes");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -54,12 +51,6 @@ public class Listar extends javax.swing.JFrame {
 
         lbListagem.setText("Itens");
 
-        ltItem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        ltItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ltItemMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(ltItem);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,29 +80,15 @@ public class Listar extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
         JOptionPane.showMessageDialog(this, ((JButton)evt.getSource()).getToolTipText(), "Informação", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnInfoActionPerformed
 
-    private void ltItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ltItemMouseClicked
-        if (evt.getClickCount() == 2) {
-            
-            Cliente cliente = (Cliente)((JList)evt.getSource()).getSelectedValue();
-            try {
-                cliente.update(Detalhes.showInputsDialog(this, cliente, "Alterar Cliente"));
-                this.ltItem.setListData(Cliente.all().toArray());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this,"Algo deu errado!", "Erro", JOptionPane.ERROR_MESSAGE , null);
-            }
-        }
-    }//GEN-LAST:event_ltItemMouseClicked
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try{
-            this.ltItem.setListData(Cliente.all().toArray());
+            this.ltItem.setListData(ItemDeEstoque.all().toArray());
         }
         catch(Exception e){
             this.ltItem.setListData(new Object[0]);
