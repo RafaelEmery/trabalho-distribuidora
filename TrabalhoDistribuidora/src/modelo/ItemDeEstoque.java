@@ -137,7 +137,7 @@ public class ItemDeEstoque extends Modelo {
         StringBuilder string = new StringBuilder();
         string.append("Nome Produto: ");
         string.append(((Cerveja)this.getProduto()).getNome());
-        string.append("/n Quantidade: ");
+        string.append("\n Quantidade: ");
         string.append(this.getQuantidade());
         return string.toString();
     }

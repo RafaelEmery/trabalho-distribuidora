@@ -1,22 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.transacaoCompra;
 
+import gui.Detalhes;
 import javax.swing.*;
+
+import modelo.Cerveja;
+import modelo.Transacao;
 import modelo.TransacaoCompra;
 /**
  *
  * @author joao
  */
-public class Listar extends javax.swing.JFrame {
+public class Criar extends javax.swing.JFrame {
 
     /**
      * Creates new form Listar
      */
-    public Listar() {
+    public Criar() {
         initComponents();
     }
 
@@ -34,7 +33,8 @@ public class Listar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ltItem = new javax.swing.JList();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -51,6 +51,17 @@ public class Listar extends javax.swing.JFrame {
 
         lbListagem.setText("Itens");
 
+        ltItem.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ltItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+					ltItemMouseClicked(evt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
         jScrollPane1.setViewportView(ltItem);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -80,18 +91,29 @@ public class Listar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
         JOptionPane.showMessageDialog(this, ((JButton)evt.getSource()).getToolTipText(), "Informação", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnInfoActionPerformed
 
+    private void ltItemMouseClicked(java.awt.event.MouseEvent evt) throws Exception {//GEN-FIRST:event_ltItemMouseClicked
+        if (evt.getClickCount() == 2) {
+            Cerveja cerveja = (Cerveja)((JList)evt.getSource()).getSelectedValue();
+            Transacao transacao = new TransacaoCompra(cerveja, -1);
+            transacao = TransacaoCompra.create(Detalhes.showInputsDialog(this, transacao, "Produto para transação de Compra"));
+            transacao.setValor(transacao.getProduto().getValor() * -1);
+            transacao.update(transacao.getValues());
+        }
+    }//GEN-LAST:event_ltItemMouseClicked
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try{
-            this.ltItem.setListData(TransacaoCompra.all().toArray());
+            this.ltItem.setListData(Cerveja.all().toArray());
         }
         catch(Exception e){
-            this.ltItem.setListData(new Object[0]);
+        	e.printStackTrace();
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -112,13 +134,13 @@ public class Listar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Listar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Criar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Listar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Criar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Listar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Criar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Listar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Criar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -126,7 +148,7 @@ public class Listar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Listar().setVisible(true);
+                new Criar().setVisible(true);
             }
         });
     }

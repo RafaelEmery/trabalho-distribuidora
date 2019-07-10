@@ -1,7 +1,7 @@
 package bll;
 import java.awt.Component;
 
-import gui.transacaoCompra.Listar;
+import gui.transacaoCompra.*;
 
 /**
  *
@@ -9,7 +9,7 @@ import gui.transacaoCompra.Listar;
  */
 public class TransacaoCompraBL {
 	public static void criarTransacao(Component parent) throws Exception{
-        Listar form = new Listar();
+		Criar form = new Criar();
         form.setVisible(true);
     }
 }

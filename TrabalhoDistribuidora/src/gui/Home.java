@@ -240,7 +240,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_miCriarFormecedorActionPerformed
 
     private void miListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarEstoqueActionPerformed
-//        EstoqueBL.listar(this);
+        EstoqueBL.listar(this);
     }//GEN-LAST:event_miListarEstoqueActionPerformed
 
     private void miListarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarProdutoActionPerformed
