@@ -181,6 +181,12 @@ public abstract class Transacao extends Modelo {
 	public void delete() throws SQLException {
 		Transacao.getConnection().delete(Transacao.getTableName()).where("id", "=", this.id + "").executar();
 	}
+        
+        public static float somarValores() throws Exception{
+            ResultSet rs = Transacao.getConnection().conn.createStatement().executeQuery("SELECT sum(valor) FROM dist.transacao;");
+            rs.next();
+            return rs.getFloat(0);
+        }
 	
 	@Override
 	public String[] getFillable() {
