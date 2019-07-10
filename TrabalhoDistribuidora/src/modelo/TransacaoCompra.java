@@ -7,6 +7,10 @@ import java.util.LinkedList;
 public class TransacaoCompra extends Transacao {
 	private Fornecedor fornecedor;
 	
+	public TransacaoCompra() {
+		super();
+	}
+	
 	public TransacaoCompra(Cerveja produto, int responsavel, int quant, double valor, double desconto) throws Exception {
 		super(produto, responsavel, quant, valor, desconto);
 		this.setFornecedor(Fornecedor.find(this.getResponsavel()));
